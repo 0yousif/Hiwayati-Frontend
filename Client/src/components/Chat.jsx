@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Profile = () => {
+const Chat = () => {
   return (
     <div>
       
@@ -8,5 +8,5 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Chat
 

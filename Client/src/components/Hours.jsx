@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Profile = () => {
+const hours = () => {
   return (
     <div>
       
@@ -8,5 +8,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
-
+export default hours
