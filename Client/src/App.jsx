@@ -1,15 +1,27 @@
+import "./App.css"
+import { Routes, Route } from "react-router-dom"
+import Nav from "./components/Nav"
 
-import './App.css'
-import Chart from './components/Chart'
+// pages
+import Home from "./pages/Home"
+import Profile from "./pages/Profile"
+import Hobby from "./pages/Hobby"
+import SignIn from "./pages/SignIn"
+import SignUp from "./pages/SignUp"
 
-function App() {
-
-
+const App = () => {
   return (
     <>
-    <Chart />
-    
-      
+      <Nav></Nav>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/Hobby" element={<Hobby />} />
+          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/signUp" element={<SignUp />} />
+        </Routes>
+      </main>
     </>
   )
 }

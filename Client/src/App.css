@@ -1,0 +1,87 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 1vw;
+  height: 100vh;
+}
+
+main,body,#root{
+  height: 100%;
+}
+
+/* Navigation bar styling  */
+.navigation-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 2rem;
+  align-items: center;
+  height: 3.25rem;
+  background-color: rgb(71, 71, 71);  
+}
+
+
+.navigation-bar .logo {
+  height: 60%;
+}
+
+.navigation-bar .links{
+  display: flex;
+  gap: 1rem;
+  color: white;
+}
+
+
+.navigation-bar .links a:link{
+  color: white;
+  text-decoration: none;
+}
+
+.navigation-bar .links a:visited{
+  color: white;
+  text-decoration: none;
+}
+
+
+/* Sign in form styling */
+
+
+.sing-in-form-container{ 
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sing-in-form {
+  width: 25rem;
+  height:auto;
+  padding: 1.25rem;
+  border-radius: 10px;
+  background-color: rgb(215, 215, 215);
+  flex-direction: column;
+  display: flex;
+  gap: 1rem;
+}
+
+.sing-in-form .is-teacher-label {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+.sing-in-form input {
+  height: 1.7rem;
+  font-size: 1rem;
+}
+.sing-in-form .is-teacher-label input {
+  transform: scale(1.25);
+}
+
+.sing-in-form [type="submit"]{
+  width: 5rem;
+  height: 1.5rem;
+
+}

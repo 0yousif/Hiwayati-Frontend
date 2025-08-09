@@ -1,12 +1,9 @@
-import React from 'react'
-
 const Profile = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <h1>This is a Profile page</h1>
+    </>
   )
 }
 
 export default Profile
-
