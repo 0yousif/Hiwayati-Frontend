@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "66b6a0d2f8a4e2b4f07c1111",
+    "username": "Sara_95",
+    "email": "sara95@example.com",
+    "passwordDigest": "$2b$10$hash1",
+    "currentCourses": [
+      { "course": "66b6a0d2f8a4e2b4f07caaaa", "hours": 12 },
+      { "course": "66b6a0d2f8a4e2b4f07cbbbb", "hours": 8 }
+    ],
+    "previousCourses": [],
+    "Scheduel": [],
+    "skills": []
+  },
+  {
+    "_id": "66b6a0d2f8a4e2b4f07c2222",
+    "username": "AliDev",
+    "email": "ali.dev@example.com",
+    "passwordDigest": "$2b$10$hash2",
+    "currentCourses": [
+      { "course": "66b6a0d2f8a4e2b4f07ccccc", "hours": 15 }
+    ],
+    "previousCourses": [
+      "66b6a0d2f8a4e2b4f07caaaa"
+    ],
+    "Scheduel": [],
+    "skills": []
+  },
+  {
+    "_id": "66b6a0d2f8a4e2b4f07c3333",
+    "username": "Lina123",
+    "email": "lina123@example.com",
+    "passwordDigest": "$2b$10$hash3",
+    "currentCourses": [
+      { "course": "66b6a0d2f8a4e2b4f07cdddd", "hours": 20 },
+      { "course": "66b6a0d2f8a4e2b4f07ceeee", "hours": 5 }
+    ],
+    "previousCourses": [],
+    "Scheduel": [],
+    "skills": []
+  }
+]
