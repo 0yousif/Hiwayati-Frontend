@@ -6,7 +6,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -15,7 +18,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -24,7 +30,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -33,7 +42,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -42,7 +54,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -51,7 +66,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -60,7 +78,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -69,7 +90,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -78,7 +102,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -87,7 +114,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -96,7 +126,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -105,7 +138,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>
@@ -114,7 +150,10 @@ const Home = () => {
         <div className="course-card">
           <div className="course-image-cotainer"></div>
           <h3>Course Name</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nobis ducimus accusamus quaerat.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            nobis ducimus accusamus quaerat.
+          </p>
           <div className="course-buttons">
             <button>More</button>
             <button>Enroll</button>

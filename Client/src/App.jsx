@@ -5,9 +5,9 @@ import Nav from "./components/Nav"
 // pages
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
-import Hobby from "./pages/Hobby"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
+import Course from "./pages/Course"
 
 const App = () => {
   return (
@@ -17,9 +17,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/Hobby" element={<Hobby />} />
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/signUp" element={<SignUp />} />
+          <Route path="/course" element={<Course />} />
         </Routes>
       </main>
     </>
