@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   box-sizing: border-box;
 }
@@ -7,7 +7,9 @@ html {
   height: 100vh;
 }
 
-main,body,#root{
+main,
+body,
+#root {
   height: 100%;
 }
 
@@ -20,36 +22,32 @@ main,body,#root{
   padding: 0 2rem;
   align-items: center;
   height: 3.25rem;
-  background-color: rgb(71, 71, 71);  
+  background-color: rgb(71, 71, 71);
 }
-
 
 .navigation-bar .logo {
   height: 60%;
 }
 
-.navigation-bar .links{
+.navigation-bar .links {
   display: flex;
   gap: 1rem;
   color: white;
 }
 
-
-.navigation-bar .links a:link{
+.navigation-bar .links a:link {
   color: white;
   text-decoration: none;
 }
 
-.navigation-bar .links a:visited{
+.navigation-bar .links a:visited {
   color: white;
   text-decoration: none;
 }
-
 
 /* Sign in form styling */
 
-
-.sing-in-form-container{ 
+.sing-in-form-container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -58,7 +56,7 @@ main,body,#root{
 }
 .sing-in-form {
   width: 25rem;
-  height:auto;
+  height: auto;
   padding: 1.25rem;
   border-radius: 10px;
   background-color: rgb(215, 215, 215);
@@ -80,8 +78,141 @@ main,body,#root{
   transform: scale(1.25);
 }
 
-.sing-in-form [type="submit"]{
+.sing-in-form [type="submit"] {
   width: 5rem;
   height: 1.5rem;
-
 }
+
+/* Profile */
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.about-user {
+  display: flex;
+  height: 20rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 3rem;
+}
+
+.calender-container {
+  width: 23rem;
+  aspect-ratio: 4/3;
+  background-color: rgb(171, 171, 171);
+}
+
+.profile-pic-container {
+  height: 80%;
+  aspect-ratio: 1/1;
+  background-color: rgb(171, 171, 171);
+}
+.user-data {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.courses-count {
+  height: 100%;
+  width: 8.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.courses-count div {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-color: rgb(171, 171, 171);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.courses-list {
+  width: 17rem;
+  background-color: rgb(171, 171, 171);
+  height: 90%;
+  padding: 1rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.courses-list .course {
+  width: 100%;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statistics-header {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.statistics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  height: 20rem;
+}
+
+.statistics .chart {
+  height: 100%;
+  width: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(171, 171, 171);
+}
+
+.courses-card {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  flex-wrap: wrap;
+  gap: 5rem;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  gap: 1rem;
+  text-align: center;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(151, 151, 151);
+}
+
+.course-buttons{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:1rem
+}
+.course-card .course-buttons  button{
+    height: 3rem;
+    aspect-ratio: 1.75/1;
+}
+
+.course-image-cotainer {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-color: rgb(205, 205, 205);
+}
+
