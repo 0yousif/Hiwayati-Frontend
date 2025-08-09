@@ -1,14 +1,18 @@
 
 import './App.css'
-import Chart from './components/Chart'
+
+import SkillChart from './components/Chart/SkillChart'
+import CourseChart from './components/Chart/CourseChart'
 
 function App() {
 
 
   return (
     <>
-    <Chart />
-    
+     
+      <SkillChart/>
+      <CourseChart/>
+      <h1>5</h1>
       
     </>
   )
