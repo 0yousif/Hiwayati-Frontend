@@ -1,3 +1,4 @@
+import Calendar from "./../components/Calendar"
 const Profile = () => {
   return (
     <>
@@ -103,7 +104,9 @@ const Profile = () => {
               </div>
                           </div>
           </div>
-          <div className="calender-container"></div>
+          <div className="calender-container">
+            <Calendar/>
+          </div>
         </div>
           <h1 className="statistics-header">Statistics</h1>
         <div className="statistics">

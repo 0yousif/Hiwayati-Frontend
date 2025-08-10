@@ -263,3 +263,7 @@ body,
   background-color: aliceblue;
 }
 
+.react-calendar{
+  margin: 0;
+  position: absolute;
+}
