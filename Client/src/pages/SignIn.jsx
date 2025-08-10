@@ -1,6 +1,7 @@
 import axios from "axios"
-import { useState } from "react"
-
+import { useState, useContext } from "react"
+import UserContext from "../context/UserContext"
+import { useNavigate } from "react-router-dom"
 const SignIn = ({ setUser }) => {
   const initialValues = {
     email: "",
@@ -8,7 +9,7 @@ const SignIn = ({ setUser }) => {
     isTeacher: false,
   }
   const [formValues, setFormValues] = useState({})
-
+  const navigator = useNavigate()
   const handleChange = (e) => {
     if (e.target.name !== "isTeacher") {
       setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -16,6 +17,8 @@ const SignIn = ({ setUser }) => {
       setFormValues({ ...formValues, [e.target.name]: e.target.checked })
     }
   }
+  const { setContextUser } = useContext(UserContext)
+  const {contextUser} =  useContext(UserContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,39 +30,43 @@ const SignIn = ({ setUser }) => {
       )
       setUser(response.data.user)
       localStorage.setItem("token", response.data.token)
-      console.log(response.data)
+      setContextUser(response.data.user)
     } catch (error) {
       throw error
     }
   }
 
-  return (
-    <>
-      <div className="sing-in-form-container">
-        <form action="" className="sing-in-form" onSubmit={handleSubmit}>
-          <label htmlFor="username">Email</label>
-          <input type="text" name="email" id="email" onChange={handleChange} />
-          <label htmlFor="Password">Password</label>
-          <input
-            type="text"
-            name="password"
-            id="password"
-            onChange={handleChange}
-          />
-          <label htmlFor="isTeacher" className="is-teacher-label">
-            Are you a teacher?
+  if (!contextUser){
+    return (
+      <>
+        <div className="sing-in-form-container">
+          <form action="" className="sing-in-form" onSubmit={handleSubmit}>
+            <label htmlFor="username">Email</label>
+            <input type="text" name="email" id="email" onChange={handleChange} />
+            <label htmlFor="Password">Password</label>
             <input
-              type="checkbox"
-              name="isTeacher"
-              id="isTeacher"
+              type="text"
+              name="password"
+              id="password"
               onChange={handleChange}
             />
-          </label>
-          <button type="submit">Sign In</button>
-        </form>
-      </div>
-    </>
-  )
+            <label htmlFor="isTeacher" className="is-teacher-label">
+              Are you a teacher?
+              <input
+                type="checkbox"
+                name="isTeacher"
+                id="isTeacher"
+                onChange={handleChange}
+              />
+            </label>
+            <button type="submit">Sign In</button>
+          </form>
+        </div>
+      </>
+    )
+  }else {
+    navigator("/profile")
+  }
 }
 
 export default SignIn

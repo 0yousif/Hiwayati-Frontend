@@ -1,9 +1,18 @@
 import { NavLink } from "react-router-dom"
 import logo from "./../assets/logo.svg"
+import { useContext } from "react"
+import UserContext from "../context/UserContext"
+
 const Nav = ({ setUser, user }) => {
+  const { setContextUser } = useContext(UserContext)
   const SignOut = () => {
-    localStorage.removeItem("user")
-    setUser(null)
+    try {
+      localStorage.removeItem("user")
+      setUser(null)
+      setContextUser(null)
+    } catch (error) {
+      throw error
+    }
   }
 
   return (

@@ -2,6 +2,7 @@ import "./App.css"
 import { Routes, Route } from "react-router-dom"
 import Nav from "./components/Nav"
 import { CheckSession } from "./services/auth"
+
 // pages
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
@@ -10,6 +11,8 @@ import SignUp from "./pages/SignUp"
 import Course from "./pages/Course"
 import { useState,useEffect } from "react"
 
+
+
 const App = () => {
   const [user, setUser] = useState(null)
 
@@ -17,6 +20,8 @@ const App = () => {
     const user = await CheckSession()
     setUser(user)
   }
+
+
 
   useEffect(() => {
     const token = localStorage.getItem("token")
