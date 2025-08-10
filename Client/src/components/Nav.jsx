@@ -1,16 +1,29 @@
 import { NavLink } from "react-router-dom"
 import logo from "./../assets/logo.svg"
-const Nav = () => {
+const Nav = ({ setUser, user }) => {
+  const SignOut = () => {
+    localStorage.removeItem("user")
+    setUser(null)
+  }
+
   return (
     <>
       <nav className="navigation-bar">
         <img className="logo" src={logo} />
         <div className="links">
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/profile">Profile</NavLink>
-          <NavLink to="/course">Course</NavLink>
-          <NavLink to="/signIn">Sign in</NavLink>
-          <NavLink to="/signUp">Sign up</NavLink>
+          {user ? (
+            <>
+              <NavLink onClick={SignOut}>Sign out</NavLink>
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/profile">Profile</NavLink>
+              <NavLink to="/course">Course</NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to="/signIn">Sign in</NavLink>
+              <NavLink to="/signUp">Sign up</NavLink>
+            </>
+          )}
         </div>
       </nav>
     </>
