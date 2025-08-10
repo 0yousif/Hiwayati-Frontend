@@ -9,10 +9,6 @@ function App() {
 
   return (
     <>
-     
-      <SkillChart/>
-      <CourseChart/>
-      <h1>5</h1>
       
     </>
   )
