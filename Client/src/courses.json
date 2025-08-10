@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "66b6a0d2f8a4e2b4f07caaaa",
+    "name": "Frontend Workshop",
+    "skills": ["HTML", "CSS", "JavaScript"]
+  },
+  {
+    "_id": "66b6a0d2f8a4e2b4f07cbbbb",
+    "name": "React Basics",
+    "skills": ["JavaScript", "React"]
+  },
+  {
+    "_id": "66b6a0d2f8a4e2b4f07ccccc",
+    "name": "Node.js Bootcamp",
+    "skills": ["JavaScript", "Node.js", "API Development"]
+  },
+  {
+    "_id": "66b6a0d2f8a4e2b4f07cdddd",
+    "name": "UI/UX Design",
+    "skills": ["Design Thinking", "Wireframing", "Figma"]
+  },
+  {
+    "_id": "66b6a0d2f8a4e2b4f07ceeee",
+    "name": "Advanced CSS",
+    "skills": ["CSS", "Animations", "Responsive Design"]
+  }
+]

@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import Nav from "./components/Nav"
 import { CheckSession } from "./services/auth"
 
+
 // pages
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
