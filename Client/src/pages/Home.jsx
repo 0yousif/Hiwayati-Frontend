@@ -19,7 +19,7 @@ const Home = () => {
               nobis ducimus accusamus quaerat.
             </p>
             <div className="course-buttons">
-              <button>More</button>
+              <button onClick={()=>{navigator(`course/689a12be8a80051061ec0864`)}}>More</button>
               <button>Enroll</button>
             </div>
           </div>
