@@ -11,15 +11,28 @@ const Profile = () => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
   const [userInfo, setUserInfo] = useState(null)
+  const [courseInfo, setCourseInfo] = useState(null)
 
   useEffect(() => {
+
+
     const getUserInfo = async () => {
-      // console.log("contextUser.id",contextUser.id)
       const res = await Client.get(`/auth/${contextUser.id}`)
       setUserInfo(res.data)
+      console.log("contextUser.id",contextUser.id)
+      console.log("userInfo",userInfo)
     }
+
+    const getCourseInfo = async () => {
+      const res = await Client.get(`/Course`)
+      setCourseInfo(res.data)
+      console.log("courseInfo",courseInfo)
+    }
+
+
     getUserInfo()
-  }, [contextUser])
+    getCourseInfo()
+  }, [contextUser,userInfo !== null,courseInfo !==null])
   
 
   if (contextUser && userInfo) {
@@ -132,10 +145,10 @@ const Profile = () => {
           <h1 className="statistics-header">Statistics</h1>
           <div className="statistics">
             <div className="skills-charts chart">
-              <SkillChart />
-            </div>
+              <SkillChart userInfo={userInfo} courseInfo={courseInfo} />
+            </div>  
             <div className="courses-charts chart">
-              <CourseChart />
+              <CourseChart userInfo={userInfo} courseInfo={courseInfo}/>
             </div>
           </div>
         </div>

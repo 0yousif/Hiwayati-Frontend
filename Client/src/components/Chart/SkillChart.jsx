@@ -1,28 +1,60 @@
-import { useEffect, useState } from "react"
-import data from "../../seeding/data.json"
-import data2 from '../../seeding/data2.json'
-import CreateChart from "./CreateChart"
+import { useEffect, useRef } from 'react'
+import { Chart } from 'chart.js/auto'
 
-const SkillChart = () => {
-  const [labels, setLabels] = useState([])
-  const [values, setValues] = useState([])
+
+
+const SkillChart = ({userInfo, courseInfo}) => {
+  const canvasRef = useRef(null)
+ 
 
   useEffect(() => {
-    setLabels(data.map((item) => (item.name)))
-    setValues(data.map((item) => Number(item.value)))
-    
+
+    console.log('Is connect to chart')
+    console.log(userInfo,userInfo)
+  
   }, [])
 
-  return (
-  
-  <>
+  useEffect(() => {
+    const ctx = canvasRef.current.getContext('2d')
 
-<CreateChart labels={labels} values={values} type={"line"} id={'123'} />
-<CreateChart labels={labels} values={values} type={"pie"} id={'123'} />
+    const chartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [
+          'Education',
+          'Defense',
+          'Healthcare',
+          'Infrastructure',
+          'Other'
+        ],
+        datasets: [
+          {
+            label: 'Government Spending (Billion $)',
+            data: [120, 200, 150, 90, 50],
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(153, 102, 255, 0.6)'
+            ]
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' }
+        }
+      }
+    })
 
-  </>
-  
-  )
+    return () => {
+      chartInstance.destroy()
+    }
+  }, [])
+
+  return (<canvas ref={canvasRef}> </canvas>)
 }
 
 export default SkillChart
