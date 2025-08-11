@@ -1,12 +1,38 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import UserContext from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+import Client from "../services/api"
 
-const Course = ({courseId}) => {
+const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
-  
-  
+  const [message, setMessage] = useState("")
+  const [messages, setMessages] = useState([])
+
+  const getMessages = async () => {
+    const res = await Client.get(`/course/6895da05ba52465217424480/messages`)
+    setMessages(res.data)
+    console.log("message from the course", messages)
+  }
+
+  useEffect(() => {
+    getMessages()
+  }, [messages.length !== 0])
+
+  const handleMessageChange = async (e) => {
+    setMessage(e.target.value)
+  }
+
+  const handleMessageSubmit = async (e) => {
+    e.preventDefault()
+    await Client.post("/course/6895da05ba52465217424480/messages", {
+      content: message,
+    }).then(() => {
+      setMessage("")
+    })
+  }
+
   if (contextUser) {
     return (
       <>
@@ -40,10 +66,29 @@ const Course = ({courseId}) => {
           </div>
           <div className="course-live-chat">
             <div className="live-chat">
-              <div className="messages"></div>
+              <div className="messages">
+                {messages
+                  ? messages.map((message) => (
+                      <div className="message">
+                        <h3 className="message-owner">
+                          {message.userId.username}
+                        </h3>
+                        <p className="message-content">{message.content}</p>
+                      </div>
+                    ))
+                  : null}
+              </div>
               <form action="">
-                <input type="text" name="content" id="content" />
-                <button type="submit">send</button>
+                <input
+                  onChange={handleMessageChange}
+                  type="text"
+                  name="content"
+                  id="content"
+                  value={message}
+                />
+                <button type="submit" onClick={handleMessageSubmit}>
+                  send
+                </button>
               </form>
             </div>
             <div className="participants-list"></div>
@@ -51,7 +96,7 @@ const Course = ({courseId}) => {
         </div>
       </>
     )
-  }else {
+  } else {
     navigator("/signIn")
   }
 }

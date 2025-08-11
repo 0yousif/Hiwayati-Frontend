@@ -223,6 +223,20 @@ body,
 .course-page{
   padding: 2rem 2rem 0rem 2rem;
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 70vh;
+}
+
+.live-chat{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.live-chat .messages{
+  height: 100%;
+  width: 100%;
+  background-color: antiquewhite;
 }
 
 .course-page .course-image-container {
@@ -263,9 +277,19 @@ body,
   background-color: aliceblue;
 }
 
-
+.course-live-chat{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.live-chat{
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
 /* Claneder */
 .react-calendar{
-  width: 90%;
-  
+  width: 90%;  
 }
