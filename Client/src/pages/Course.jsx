@@ -8,7 +8,7 @@ const Course = () => {
   let {id} = useParams()
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
-  const [course,setCourse] =useState([])
+  const [course,setCourse] =useState(null)
 
   useEffect(()=>{
     const getCourseById = async()=>{
@@ -17,20 +17,22 @@ const Course = () => {
     }
     getCourseById()
   },[])
+  if(!course){
+    return <h1>...loding</h1>
+  }
   
   if (contextUser) {
     return (
       <>
         <div className="course-page">
           <div className="course-info">
-            <div className="course-image-container"></div>
+            <div className="course-image-container"><img src={course.image} /></div>
             <div className="written-datails">
-              <h1 className="course-name">Course Name</h1>
+              <h1 className="course-name">{course.name}</h1>
               <div className="written-datail">
                 <h3>Description</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas
-                  ab assumenda nihil velit.
+                  {course.name}
                 </p>
               </div>
               <div className="written-datail">
@@ -43,10 +45,9 @@ const Course = () => {
               </div>
             </div>
             <div className="course-skills">
-              <div className="course-skill">Skill</div>
-              <div className="course-skill">Skill</div>
-              <div className="course-skill">Skill</div>
-              <div className="course-skill">Skill</div>
+              {course.skills.map((skill)=>(
+                <div className="course-skill">{skill.name}</div>
+              ))}
             </div>
           </div>
           <div className="course-live-chat">
