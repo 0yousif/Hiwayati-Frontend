@@ -45,7 +45,7 @@ const SignIn = ({ setUser }) => {
             <input type="text" name="email" id="email" onChange={handleChange} />
             <label htmlFor="Password">Password</label>
             <input
-              type="text"
+              type="password"
               name="password"
               id="password"
               onChange={handleChange}

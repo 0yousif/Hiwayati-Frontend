@@ -12,7 +12,7 @@ const Course = () => {
 
   useEffect(()=>{
     const getCourseById = async()=>{
-      const res =await getCourse('6899c6efc014950044b148b2')
+      const res =await getCourse('689a12be8a80051061ec0864')
       setCourse(res)
     }
     getCourseById()
@@ -39,7 +39,7 @@ const Course = () => {
               </div>
               <div className="written-datail">
                 <h3>Teacher</h3>
-                <p>{course.teacher}</p>
+                <p>{course.teacher?.username}</p>
               </div>
             </div>
             <div className="course-skills">
