@@ -31,3 +31,14 @@ export const CheckSession = async () => {
   }
 }
 
+export const UserId = async () => {
+  try {
+    // Checks if the current token if it exists is valid
+    const res = await Client.get("/auth/session")
+    return res.data.id
+  } catch (error) {
+    throw error
+  }
+}
+
+

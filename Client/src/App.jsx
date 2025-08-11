@@ -12,6 +12,8 @@ import SignUp from "./pages/SignUp"
 import Course from "./pages/Course"
 import { useState,useEffect } from "react"
 
+import Data from "./context/Data"
+
 
 
 const App = () => {
@@ -20,23 +22,35 @@ const App = () => {
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)
+    console.log("ysrt sesstion id")
+    console.log(user.id)
+
+    
+    
   }
-
-
-
+  
+  
+  
   useEffect(() => {
     const token = localStorage.getItem("token")
     // Check if token exists before requesting to validate the token
     if (token) {
       checkToken()
+      
     }
+    
+    
+    
+    
   }, [])
-
+  
   return (
     <>
       <Nav setUser={setUser} user={user}></Nav>
       <h1>user{user ? user.username : ""}</h1>
       <main>
+
+          {user && <Data userId={user.id}/>}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
