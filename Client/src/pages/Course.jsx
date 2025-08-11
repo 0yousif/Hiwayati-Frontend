@@ -6,6 +6,7 @@ const Course = ({courseId}) => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
   
+  
   if (contextUser) {
     return (
       <>

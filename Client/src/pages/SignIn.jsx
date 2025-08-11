@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import UserContext from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
 import Client from "../services/api"
@@ -19,31 +19,36 @@ const SignIn = ({ setUser }) => {
     }
   }
   const { setContextUser } = useContext(UserContext)
-  const {contextUser} =  useContext(UserContext)
+  const { contextUser } = useContext(UserContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      const response = await Client.post(
-        "/auth/signIn",
-        formValues
-      )
-      setUser(response.data.user)
+      const response = await Client.post("/auth/signIn", formValues)
       localStorage.setItem("token", response.data.token)
+      setUser(response.data.user)
       setContextUser(response.data.user)
     } catch (error) {
       throw error
     }
   }
 
-  if (!contextUser){
+  // useEffect(()=>{},[contextUser])
+
+
+  if (!contextUser) {
     return (
       <>
         <div className="sing-in-form-container">
           <form action="" className="sing-in-form" onSubmit={handleSubmit}>
             <label htmlFor="username">Email</label>
-            <input type="text" name="email" id="email" onChange={handleChange} />
+            <input
+              type="text"
+              name="email"
+              id="email"
+              onChange={handleChange}
+            />
             <label htmlFor="Password">Password</label>
             <input
               type="text"
@@ -65,7 +70,7 @@ const SignIn = ({ setUser }) => {
         </div>
       </>
     )
-  }else {
+  }else{
     navigator("/profile")
   }
 }
