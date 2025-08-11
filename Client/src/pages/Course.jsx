@@ -1,10 +1,22 @@
-import { useContext } from "react"
+import {useState,useEffect, useContext } from "react"
 import UserContext from "../context/UserContext"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { getCourse } from "../services/course"
+
 
 const Course = () => {
+  let {id} = useParams()
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
+  const [course,setCourse] =useState([])
+
+  useEffect(()=>{
+    const getCourseById = async()=>{
+      const res =await getCourse('6899c6efc014950044b148b2')
+      setCourse(res)
+    }
+    getCourseById()
+  },[])
   
   if (contextUser) {
     return (
@@ -27,7 +39,7 @@ const Course = () => {
               </div>
               <div className="written-datail">
                 <h3>Teacher</h3>
-                <p>Mr. Zainab</p>
+                <p>{course.teacher}</p>
               </div>
             </div>
             <div className="course-skills">
