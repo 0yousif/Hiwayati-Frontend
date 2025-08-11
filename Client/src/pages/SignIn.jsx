@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState, useContext } from "react"
 import UserContext from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
+import Client from "../services/api"
 const SignIn = ({ setUser }) => {
   const initialValues = {
     email: "",
@@ -24,8 +25,8 @@ const SignIn = ({ setUser }) => {
     e.preventDefault()
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/auth/signIn",
+      const response = await Client.post(
+        "/auth/signIn",
         formValues
       )
       setUser(response.data.user)

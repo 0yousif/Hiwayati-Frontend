@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import data from "../../data.json"
-import data2 from '../../data2.json'
+import data from "../../seeding/data.json"
+import data2 from '../../seeding/data2.json'
 import CreateChart from "./CreateChart"
 
 const SkillChart = () => {

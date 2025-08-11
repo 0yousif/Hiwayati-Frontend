@@ -263,7 +263,9 @@ body,
   background-color: aliceblue;
 }
 
+
+/* Claneder */
 .react-calendar{
-  margin: 0;
-  position: absolute;
+  width: 90%;
+  
 }

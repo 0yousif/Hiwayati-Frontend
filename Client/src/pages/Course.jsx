@@ -2,7 +2,7 @@ import { useContext } from "react"
 import UserContext from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
 
-const Course = () => {
+const Course = ({courseId}) => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
   
