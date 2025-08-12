@@ -61,14 +61,13 @@ const Course = ({ courseId }) => {
       <>
         <div className="course-page">
           <div className="course-info">
-            <div className="course-image-container"></div>
+            <div className="course-image-container"><img src={course.image} /></div>
             <div className="written-datails">
-              <h1 className="course-name">Course Name</h1>
+              <h1 className="course-name">{course.name}</h1>
               <div className="written-datail">
                 <h3>Description</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas
-                  ab assumenda nihil velit.
+                  {course.name}
                 </p>
               </div>
               <div className="written-datail">
@@ -77,14 +76,13 @@ const Course = ({ courseId }) => {
               </div>
               <div className="written-datail">
                 <h3>Teacher</h3>
-                <p>Mr. Zainab</p>
+                <p>{course.teacher?.username}</p>
               </div>
             </div>
             <div className="course-skills">
-              <div className="course-skill">Skill</div>
-              <div className="course-skill">Skill</div>
-              <div className="course-skill">Skill</div>
-              <div className="course-skill">Skill</div>
+              {course.skills.map((skill)=>(
+                <div className="course-skill">{skill.name}</div>
+              ))}
             </div>
           </div>
           <div className="course-live-chat">

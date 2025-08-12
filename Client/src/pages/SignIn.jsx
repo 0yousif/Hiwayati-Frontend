@@ -51,7 +51,7 @@ const SignIn = ({ setUser }) => {
             />
             <label htmlFor="Password">Password</label>
             <input
-              type="text"
+              type="password"
               name="password"
               id="password"
               onChange={handleChange}
