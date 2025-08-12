@@ -5,13 +5,24 @@ import { useEffect } from "react"
 import Client from "../services/api"
 import io from "socket.io-client"
 const socket = io("http://localhost:5000")
+import { getCourse } from "../services/course"
 
 const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
-  const {id} = useParams()
+  const [course, setCourse] = useState(null)
+
+  useEffect(() => {
+    const getCourseById = async () => {
+      const res = await getCourse(id)
+      setCourse(res)
+    }
+    getCourseById()
+  }, [])
+
+  const { id } = useParams()
   const getMessages = async () => {
     const res = await Client.get(`/course/${id}/messages`)
     setMessages(res.data)
@@ -20,11 +31,9 @@ const Course = ({ courseId }) => {
 
   // Sockets
 
-  socket.on("receiveMessage", (msg, username,messageCourseId) => {
-    
-    console.log(messageCourseId , id)
-    if (messageCourseId === id){
-
+  socket.on("receiveMessage", (msg, username, messageCourseId) => {
+    console.log(messageCourseId, id)
+    if (messageCourseId === id) {
       const newMessage = {
         userId: { username: username },
         content: msg,
@@ -36,7 +45,7 @@ const Course = ({ courseId }) => {
 
   const sendMessage = (message) => {
     console.log(id)
-    socket.emit("sendMessage", message, contextUser.username,id)
+    socket.emit("sendMessage", message, contextUser.username, id)
   }
 
   useEffect(() => {
@@ -56,19 +65,21 @@ const Course = ({ courseId }) => {
     // setMessage("")
   }
 
+  if (!course) {
+    return <h1>...loding</h1>
+  }
+
   if (contextUser) {
     return (
       <>
         <div className="course-page">
           <div className="course-info">
-            <div className="course-image-container"><img src={course.image} /></div>
+            <div className="course-image-container"></div>
             <div className="written-datails">
               <h1 className="course-name">{course.name}</h1>
               <div className="written-datail">
                 <h3>Description</h3>
-                <p>
-                  {course.name}
-                </p>
+                <p>{course.name}</p>
               </div>
               <div className="written-datail">
                 <h3>Location</h3>
@@ -80,7 +91,7 @@ const Course = ({ courseId }) => {
               </div>
             </div>
             <div className="course-skills">
-              {course.skills.map((skill)=>(
+              {course.skills.map((skill) => (
                 <div className="course-skill">{skill.name}</div>
               ))}
             </div>
