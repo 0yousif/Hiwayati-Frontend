@@ -1,15 +1,30 @@
 import { useContext } from "react"
 import UserContext from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
-
-
+import CoursesList from "../components/CoursesList"
+import { useState, useEffect } from "react"
+import Client from "../services/api"
 const Home = () => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
-  if (contextUser) {
+  const [objectsList, setObjectsList] = useState(null)
+
+
+    if (contextUser && !objectsList) {
+      const getObjectsList = async () => {
+        const res = await Client.get(`/course`)
+        setObjectsList(res.data)
+        console.log(objectsList)
+      }
+      getObjectsList()
+    }
+  if (contextUser && objectsList) {
     return (
       <div className="home-page">
         <h1>Recommended For You</h1>
+yousif/signing-features
+        <CoursesList objectsList={objectsList} />
+        
         <div className="courses-card">
           <div className="course-card">
             <div className="course-image-cotainer"></div>
@@ -171,7 +186,7 @@ const Home = () => {
       </div>
     )
   } else {
-  navigator("/signIn")
+    navigator("/signIn")
   }
 }
 

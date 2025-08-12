@@ -1,26 +1,61 @@
-import {useState,useEffect, useContext } from "react"
+import { useContext, useState } from "react"
 import UserContext from "../context/UserContext"
 import { useNavigate, useParams } from "react-router-dom"
-import { getCourse } from "../services/course"
+import { useEffect } from "react"
+import Client from "../services/api"
+import io from "socket.io-client"
+const socket = io("http://localhost:5000")
 
-
-const Course = () => {
-  let {id} = useParams()
+const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
-  const [course,setCourse] =useState(null)
-
-  useEffect(()=>{
-    const getCourseById = async()=>{
-      const res =await getCourse(id)
-      setCourse(res)
-    }
-    getCourseById()
-  },[])
-  if(!course){
-    return <h1>...loding</h1>
+  const [message, setMessage] = useState("")
+  const [messages, setMessages] = useState([])
+  const {id} = useParams()
+  const getMessages = async () => {
+    const res = await Client.get(`/course/${id}/messages`)
+    setMessages(res.data)
+    // console.log("message from the course", messages)
   }
-  
+
+  // Sockets
+
+  socket.on("receiveMessage", (msg, username,messageCourseId) => {
+    
+    console.log(messageCourseId , id)
+    if (messageCourseId === id){
+
+      const newMessage = {
+        userId: { username: username },
+        content: msg,
+      }
+      console.log(messages)
+      setMessages([...messages, newMessage])
+    }
+  })
+
+  const sendMessage = (message) => {
+    console.log(id)
+    socket.emit("sendMessage", message, contextUser.username,id)
+  }
+
+  useEffect(() => {
+    getMessages()
+  }, [messages.length !== 0])
+
+  const handleMessageChange = async (e) => {
+    setMessage(e.target.value)
+  }
+
+  const handleMessageSubmit = async (e) => {
+    e.preventDefault()
+    await Client.post(`/course/${id}/messages`, {
+      content: message,
+    })
+    sendMessage(message)
+    // setMessage("")
+  }
+
   if (contextUser) {
     return (
       <>
@@ -52,10 +87,29 @@ const Course = () => {
           </div>
           <div className="course-live-chat">
             <div className="live-chat">
-              <div className="messages"></div>
+              <div className="messages">
+                {messages
+                  ? messages.map((message) => (
+                      <div className="message">
+                        <h3 className="message-owner">
+                          {message.userId.username}
+                        </h3>
+                        <p className="message-content">{message.content}</p>
+                      </div>
+                    ))
+                  : null}
+              </div>
               <form action="">
-                <input type="text" name="content" id="content" />
-                <button type="submit">send</button>
+                <input
+                  onChange={handleMessageChange}
+                  type="text"
+                  name="content"
+                  id="content"
+                  value={message}
+                />
+                <button type="submit" onClick={handleMessageSubmit}>
+                  send
+                </button>
               </form>
             </div>
             <div className="participants-list"></div>
@@ -63,7 +117,7 @@ const Course = () => {
         </div>
       </>
     )
-  }else {
+  } else {
     navigator("/signIn")
   }
 }

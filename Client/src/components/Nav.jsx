@@ -6,13 +6,9 @@ import UserContext from "../context/UserContext"
 const Nav = ({ setUser, user }) => {
   const { setContextUser } = useContext(UserContext)
   const SignOut = () => {
-    try {
-      localStorage.removeItem("user")
-      setUser(null)
-      setContextUser(null)
-    } catch (error) {
-      throw error
-    }
+    localStorage.removeItem("user")
+    setUser(null)
+    setContextUser(null)
   }
 
   return (

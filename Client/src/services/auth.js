@@ -30,4 +30,3 @@ export const CheckSession = async () => {
     throw error
   }
 }
-

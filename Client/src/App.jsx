@@ -3,31 +3,28 @@ import { Routes, Route } from "react-router-dom"
 import Nav from "./components/Nav"
 import { CheckSession } from "./services/auth"
 
-
 // pages
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import Course from "./pages/Course"
-import { useState,useEffect } from "react"
-
-
+import { useState, useEffect, useContext } from "react"
+import UserContext from "./context/UserContext"
 
 const App = () => {
   const [user, setUser] = useState(null)
-
+  const { setContextUser, contextUser } = useContext(UserContext)
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)
+    setContextUser(user)
   }
-
-
 
   useEffect(() => {
     const token = localStorage.getItem("token")
     // Check if token exists before requesting to validate the token
-    if (token) {
+    if (token) {      
       checkToken()
     }
   }, [])
