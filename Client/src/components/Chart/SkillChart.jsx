@@ -11,7 +11,6 @@ const SkillChart = ({userInfo, courseInfo}) => {
    let courseValue =[]
 
    
-  useEffect(() => {
 
     console.log('Is connect to chart')
     console.log("userInfo",userInfo)
@@ -31,23 +30,33 @@ const SkillChart = ({userInfo, courseInfo}) => {
       console.log("selectedCourse",selectedCourse)
       courseKey.push(Courses[selectedCourse.course])
       courseValue.push(selectedCourse.hours)
-
-
     }
 
+    console.log("------------------------ back ---------------------")
+    console.log("courseKey",courseKey)
+    console.log("courseValue",courseValue)
+
+      for(let i=0;i<userInfo.previousCourses.length;i++){
+      const selectedCourse = userInfo.previousCourses[i]
+      console.log("selectedCourse",selectedCourse)
+      courseKey.push(Courses[selectedCourse.course])
+      courseValue.push(selectedCourse.hours)
+    }
+
+ console.log("------------------------ after ---------------------")
     console.log("courseKey",courseKey)
     console.log("courseValue",courseValue)
 
     console.log("Courses",Courses)
 
   
-  }, [])
 
+   
   useEffect(() => {
     const ctx = canvasRef.current.getContext('2d')
 
     const chartInstance = new Chart(ctx, {
-      type: 'bar',
+      type: 'radar',
       data: {
         labels: courseKey
         ,

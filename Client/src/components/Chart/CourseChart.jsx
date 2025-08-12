@@ -31,8 +31,13 @@ const CourseChart = ({userInfo, courseInfo}) => {
       console.log("selectedCourse",selectedCourse)
       courseKey.push(Courses[selectedCourse.course])
       courseValue.push(selectedCourse.hours)
+    }
 
-
+    for(let i=0;i<userInfo.previousCourses.length;i++){
+      const selectedCourse = userInfo.previousCourses[i]
+      console.log("selectedCourse",selectedCourse)
+      courseKey.push(Courses[selectedCourse.course])
+      courseValue.push(selectedCourse.hours)
     }
 
     console.log("courseKey",courseKey)
