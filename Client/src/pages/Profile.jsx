@@ -14,7 +14,6 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      // console.log("contextUser.id",contextUser.id)
       const res = await Client.get(`/auth/${contextUser.id}`)
       setUserInfo(res.data)
     }

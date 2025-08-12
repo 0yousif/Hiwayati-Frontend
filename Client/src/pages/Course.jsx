@@ -1,19 +1,42 @@
 import { useContext, useState } from "react"
 import UserContext from "../context/UserContext"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect } from "react"
 import Client from "../services/api"
+import io from "socket.io-client"
+const socket = io("http://localhost:5000")
 
 const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
-
+  const {id} = useParams()
   const getMessages = async () => {
-    const res = await Client.get(`/course/6895da05ba52465217424480/messages`)
+    const res = await Client.get(`/course/${id}/messages`)
     setMessages(res.data)
-    console.log("message from the course", messages)
+    // console.log("message from the course", messages)
+  }
+
+  // Sockets
+
+  socket.on("receiveMessage", (msg, username,messageCourseId) => {
+    
+    console.log(messageCourseId , id)
+    if (messageCourseId === id){
+
+      const newMessage = {
+        userId: { username: username },
+        content: msg,
+      }
+      console.log(messages)
+      setMessages([...messages, newMessage])
+    }
+  })
+
+  const sendMessage = (message) => {
+    console.log(id)
+    socket.emit("sendMessage", message, contextUser.username,id)
   }
 
   useEffect(() => {
@@ -26,11 +49,11 @@ const Course = ({ courseId }) => {
 
   const handleMessageSubmit = async (e) => {
     e.preventDefault()
-    await Client.post("/course/6895da05ba52465217424480/messages", {
+    await Client.post(`/course/${id}/messages`, {
       content: message,
-    }).then(() => {
-      setMessage("")
     })
+    sendMessage(message)
+    // setMessage("")
   }
 
   if (contextUser) {

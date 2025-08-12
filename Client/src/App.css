@@ -237,6 +237,7 @@ body,
   height: 100%;
   width: 100%;
   background-color: antiquewhite;
+  overflow-y: scroll;
 }
 
 .course-page .course-image-container {

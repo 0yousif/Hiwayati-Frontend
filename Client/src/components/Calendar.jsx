@@ -43,7 +43,6 @@ const Calendar = () => {
         value={date}
         tileContent={tileContent}
       />
-      {/* {console.log(date)} */}
     </div>
   )
 }
