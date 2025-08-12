@@ -69,7 +69,8 @@ const Course = ({ courseId }) => {
     return <h1>...loding</h1>
   }
 
-  if (contextUser) {
+  if (contextUser ) {
+    
     return (
       <>
         <div className="course-page">
@@ -100,14 +101,16 @@ const Course = ({ courseId }) => {
             <div className="live-chat">
               <div className="messages">
                 {messages
-                  ? messages.map((message) => (
-                      <div className="message">
-                        <h3 className="message-owner">
-                          {message.userId.username}
-                        </h3>
-                        <p className="message-content">{message.content}</p>
-                      </div>
-                    ))
+                  ? messages.map((message) => {
+                    {console.log(message)}
+                    
+      return <><div className="message">
+        <h3 className="message-owner">
+          {message.userId.username}
+        </h3>
+  <p className="message-content">{message.content}</p>
+    </div>
+            </>})
                   : null}
               </div>
               <form action="">
