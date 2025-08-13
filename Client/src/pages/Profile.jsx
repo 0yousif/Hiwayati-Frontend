@@ -15,7 +15,7 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      console.log()
+      // console.log()
       const res = await Client.get(`/auth/${contextUser.id}`)
       setUserInfo(res.data)
     }
@@ -23,13 +23,13 @@ const Profile = () => {
     const getCourseInfo = async () => {
       const res = await Client.get(`/course`)
       setCourseInfo(res.data)
-      console.log("courseInfo",courseInfo)
+      // console.log("courseInfo",courseInfo)
     }
 
 
 
 
-    getUserInfo()
+    contextUser && getUserInfo()
     getCourseInfo()
   }, [contextUser, userInfo !== null])
   
@@ -57,9 +57,9 @@ const Profile = () => {
 
       allCourses={...currentCourses,...previousCourses}
 
-      console.log("allCourses",allCourses)
-      console.log("currentCourses",currentCourses)
-      console.log("previousCourses",previousCourses)
+      // console.log("allCourses",allCourses)
+      // console.log("currentCourses",currentCourses)
+      // console.log("previousCourses",previousCourses)
      
 
       
@@ -67,7 +67,7 @@ const Profile = () => {
       getCurrentCourses()
       getPreviousCourses()
 
-    console.log("userInfo",userInfo)
+    // console.log("userInfo",userInfo)
     return (
       <>
         <div className="profile-page">
@@ -93,7 +93,7 @@ const Profile = () => {
 
                   
                 {Object.entries(currentCourses).map(([id,name]) => (
-                  <Link to={`/course/${id}`} >
+                  <Link key={id} to={`/course/${id}`} >
                     <div className="course">
                       <p>{name}</p>
                       <p>Active</p>
@@ -117,7 +117,7 @@ const Profile = () => {
               </div>
             </div>
             <div className="calender-container">
-              <Calendar />
+              <Calendar userInfo={userInfo} />
             </div>
           </div>
           <h1 className="statistics-header">Statistics</h1>
