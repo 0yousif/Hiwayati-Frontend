@@ -37,8 +37,6 @@ const Profile = () => {
 
     
     let allCourses = {}
-    let courseKey = []
-    let courseValue = []
     let currentCourses = {}
     let previousCourses = {}
 
@@ -122,10 +120,10 @@ const Profile = () => {
           <h1 className="statistics-header">Statistics</h1>
           <div className="statistics">
             <div className="skills-charts chart">
-              {/* <SkillChart /> */}
+              <SkillChart userInfo={userInfo}/>
             </div>
             <div className="courses-charts chart">
-              <CourseChart userInfo={userInfo} />
+              <CourseChart userInfo={userInfo} courseInfo={courseInfo}  />
             </div>
           </div>
         </div>

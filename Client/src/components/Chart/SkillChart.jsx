@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react'
 import { Chart } from 'chart.js/auto'
 
-const SkillChart = ({ userInfo }) => {
+const SkillChart = ({ userInfo, courseInfo}) => {
   const canvasRef = useRef(null)
 
-  let Courses = {}
-  let courseKey = []
-  let courseValue = []
+
     console.log('------------------------------------------------')
     console.log('userInfo', userInfo)
+
+
   let arts= 0
   let strategic = 0
   let tech = 0
@@ -16,7 +16,80 @@ const SkillChart = ({ userInfo }) => {
   let handCrafts = 0
   let logicalThinking = 0
 
-  useEffect(() => {
+
+
+  for(let i =0 ; i< userInfo.currentCourses.length; i++){
+    let course = userInfo.currentCourses[i].course
+    let courseHours = Number(userInfo.currentCourses[i].hours)
+    
+    for(let j=0 ; j<userInfo.currentCourses[i].course.skills.length;j++){
+      const skillName = course.skills[j].name
+
+
+      switch (skillName) {
+        case 'Arts':
+          arts += courseHours
+          break
+        case 'Strategic':
+          strategic += courseHours
+          break
+        case 'Tech':
+          tech += courseHours
+          break
+        case 'Communication':
+          communication += courseHours
+          break
+        case 'Hand Crafts':
+          handCrafts += courseHours
+          break
+        case 'Logical Thinking':
+          logicalThinking += courseHours
+          break
+      }
+    }
+
+  }
+
+   for(let i =0 ; i< userInfo.previousCourses.length; i++){
+    let course = userInfo.previousCourses[i].course
+    let courseHours = Number(userInfo.previousCourses[i].hours)
+    
+    for(let j=0 ; j<userInfo.previousCourses[i].course.skills.length;j++){
+      const skillName = course.skills[j].name
+
+
+      switch (skillName) {
+        case 'Arts':
+          arts += courseHours
+          break
+        case 'Strategic':
+          strategic += courseHours
+          break
+        case 'Tech':
+          tech += courseHours
+          break
+        case 'Communication':
+          communication += courseHours
+          break
+        case 'Hand Crafts':
+          handCrafts += courseHours
+          break
+        case 'Logical Thinking':
+          logicalThinking += courseHours
+          break
+      }
+    }
+
+  }
+
+  console.log("Arts:", arts)
+console.log("Strategic:", strategic)
+console.log("Tech:", tech)
+console.log("Communication:", communication)
+console.log("Hand Crafts:", handCrafts)
+console.log("Logical Thinking:", logicalThinking)
+
+useEffect(() => {
 
     const getSkillInfo = async () => {
       const Skill = userInfo.skills
@@ -29,7 +102,7 @@ const SkillChart = ({ userInfo }) => {
     const ctx = canvasRef.current.getContext('2d')
 
     const chartInstance = new Chart(ctx, {
-      type: 'radar',
+      type: 'polarArea',
       data: {
         labels: [
           'Arts',
@@ -42,7 +115,7 @@ const SkillChart = ({ userInfo }) => {
         datasets: [
           {
             label: 'Hours',
-            data: courseValue,
+            data: [arts,strategic,tech,communication,handCrafts,logicalThinking],
             backgroundColor: [
               'rgba(54, 162, 235, 0.6)',
               'rgba(255, 99, 132, 0.6)',
@@ -64,7 +137,7 @@ const SkillChart = ({ userInfo }) => {
     return () => {
       chartInstance.destroy()
     }
-  }, [])
+  }, )
 
   return <canvas ref={canvasRef}> </canvas>
 }
