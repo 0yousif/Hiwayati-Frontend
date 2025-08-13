@@ -62,7 +62,7 @@ const Participant = ({ userInfo, courseInfo }) => {
             </div>
           </div>
           <div className="calender-container">
-            <Calendar />
+            <Calendar userInfo={userInfo} />
           </div>
         </div>
         <h1 className="statistics-header">Statistics</h1>
