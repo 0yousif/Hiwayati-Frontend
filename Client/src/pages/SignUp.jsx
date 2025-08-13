@@ -26,7 +26,6 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // console.log(e.target["image"].files[0])
     await axios.post("http://127.0.0.1:3000/auth/signUp", {
       username: formValues.username,
       isTeacher: formValues.isTeacher,

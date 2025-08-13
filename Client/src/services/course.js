@@ -14,7 +14,7 @@ export const getCourse = async (courseId) => {
 export const createEvent = async (data) => {
   
   try {
-    console.log(data)
+
     const res = await Client.post("/:id/event", data)
     return res.data
   } catch (error) {

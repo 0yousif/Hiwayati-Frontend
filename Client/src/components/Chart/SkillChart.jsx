@@ -5,8 +5,6 @@ const SkillChart = ({ userInfo, courseInfo}) => {
   const canvasRef = useRef(null)
 
 
-    console.log('------------------------------------------------')
-    console.log('userInfo', userInfo)
 
 
   let arts= 0
@@ -82,18 +80,10 @@ const SkillChart = ({ userInfo, courseInfo}) => {
 
   }
 
-  console.log("Arts:", arts)
-console.log("Strategic:", strategic)
-console.log("Tech:", tech)
-console.log("Communication:", communication)
-console.log("Hand Crafts:", handCrafts)
-console.log("Logical Thinking:", logicalThinking)
-
 useEffect(() => {
 
     const getSkillInfo = async () => {
       const Skill = userInfo.skills
-      console.log("Skill",Skill)
 
     }
     getSkillInfo()

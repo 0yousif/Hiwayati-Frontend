@@ -29,7 +29,6 @@ const SignIn = ({ setUser }) => {
       localStorage.setItem("token", response.data.token)
       setUser(response.data.user)
       setContextUser(response.data.user)
-      console.log(response.data.user)
     } catch (error) {
       throw error
     }
