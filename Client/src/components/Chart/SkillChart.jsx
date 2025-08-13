@@ -1,28 +1,72 @@
-import { useEffect, useState } from "react"
-import data from "../../seeding/data.json"
-import data2 from '../../seeding/data2.json'
-import CreateChart from "./CreateChart"
+import { useEffect, useRef } from 'react'
+import { Chart } from 'chart.js/auto'
 
-const SkillChart = () => {
-  const [labels, setLabels] = useState([])
-  const [values, setValues] = useState([])
+const SkillChart = ({ userInfo }) => {
+  const canvasRef = useRef(null)
+
+  let Courses = {}
+  let courseKey = []
+  let courseValue = []
+    console.log('------------------------------------------------')
+    console.log('userInfo', userInfo)
+  let arts= 0
+  let strategic = 0
+  let tech = 0
+  let communication = 0
+  let handCrafts = 0
+  let logicalThinking = 0
 
   useEffect(() => {
-    setLabels(data.map((item) => (item.name)))
-    setValues(data.map((item) => Number(item.value)))
-    
+
+    const getSkillInfo = async () => {
+      const Skill = userInfo.skills
+      console.log("Skill",Skill)
+
+    }
+    getSkillInfo()
+
+
+    const ctx = canvasRef.current.getContext('2d')
+
+    const chartInstance = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: [
+          'Arts',
+          'Strategic',
+          'Tech',
+          'Communication',
+          'Hand Crafts',
+          'Logical Thinking'
+        ],
+        datasets: [
+          {
+            label: 'Hours',
+            data: courseValue,
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(153, 102, 255, 0.6)'
+            ]
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' }
+        }
+      }
+    })
+
+    return () => {
+      chartInstance.destroy()
+    }
   }, [])
 
-  return (
-  
-  <>
-
-<CreateChart labels={labels} values={values} type={"line"} id={'123'} />
-<CreateChart labels={labels} values={values} type={"pie"} id={'123'} />
-
-  </>
-  
-  )
+  return <canvas ref={canvasRef}> </canvas>
 }
 
 export default SkillChart
