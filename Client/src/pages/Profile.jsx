@@ -7,6 +7,7 @@ import CourseChart from "../components/Chart/CourseChart"
 import axios from "axios"
 import Client from "../services/api"
 import Participant from "./Participant"
+import Teacher from "./Teacher"
 
 const Profile = () => {
   const { contextUser } = useContext(UserContext)
@@ -36,51 +37,18 @@ const Profile = () => {
 
   if (contextUser && userInfo) {
 
-    
 
-    
-    let allCourses = {}
-    let currentCourses = {}
-    let previousCourses = {}
-
-    const getCurrentCourses = () => {
-      userInfo.currentCourses.forEach((selectedCourse) => {
-        currentCourses[selectedCourse.course._id] = selectedCourse.course.name
-      })
-
-    }
-
-    const getPreviousCourses = () => {
-      userInfo.previousCourses.forEach((selectedCourse) => {
-        previousCourses[selectedCourse.course._id] = selectedCourse.course.name
-      })
-
-      allCourses={...currentCourses,...previousCourses}
-
-      console.log("allCourses",allCourses)
-      console.log("currentCourses",currentCourses)
-      console.log("previousCourses",previousCourses)
-     
-
-      
-    }
-      getCurrentCourses()
-      getPreviousCourses()
 
     console.log("userInfo",userInfo)
     return (
       
       <>
-      { userInfo.currentCourses? 
-      <Participant userInfo={userInfo} courseInfo={courseInfo} currentCourses={currentCourses} previousCourses={previousCourses} />
+      { userInfo.currentCourses ?
+      <Participant userInfo={userInfo} courseInfo={courseInfo} />
       :
-      <div>555</div>
+      <Teacher userInfo={userInfo} courseInfo={courseInfo} />
       }
-
-   
-        
-      
-      </>
+     </>
     )
   }
 }

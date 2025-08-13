@@ -3,7 +3,24 @@ import Calendar from './../components/Calendar'
 import SkillChart from '../components/Chart/SkillChart'
 import CourseChart from '../components/Chart/CourseChart'
 
-const Participant = ({ userInfo, courseInfo, currentCourses, previousCourses }) => {
+const Participant = ({ userInfo, courseInfo }) => {
+
+  const currentCourses = {}
+  const previousCourses = {}
+
+    if (userInfo.currentCourses) {
+    userInfo.currentCourses.forEach((selectedCourse) => {
+      currentCourses[selectedCourse.course._id] = selectedCourse.course.name
+    })
+  }
+
+  if (userInfo.previousCourses) {
+    userInfo.previousCourses.forEach((selectedCourse) => {
+      previousCourses[selectedCourse.course._id] = selectedCourse.course.name
+    })
+  }
+
+
   return (
     <>
       <div className="profile-page">
