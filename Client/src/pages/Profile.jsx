@@ -6,6 +6,7 @@ import SkillChart from "../components/Chart/SkillChart"
 import CourseChart from "../components/Chart/CourseChart"
 import axios from "axios"
 import Client from "../services/api"
+import Participant from "./Participant"
 
 const Profile = () => {
   const { contextUser } = useContext(UserContext)
@@ -34,6 +35,8 @@ const Profile = () => {
   
 
   if (contextUser && userInfo) {
+
+    
 
     
     let allCourses = {}
@@ -66,67 +69,17 @@ const Profile = () => {
 
     console.log("userInfo",userInfo)
     return (
+      
       <>
-        <div className="profile-page">
-          <div className="about-user">
-            <div className="user-data">
-              <div className="profile-pic-container">
-                <img src="asd" alt="" />
-                <h1>1</h1>
-              </div>
-              <div className="courses-count">
-                <div>
-                  <p>Previous</p>
-                  <h3>{userInfo.previousCourses.length}</h3>
-                </div>
-                <div>
-                  <p>Current</p>
-                  <h3>{userInfo.currentCourses.length}</h3>
-                </div>
-              </div>
+      { userInfo.currentCourses? 
+      <Participant userInfo={userInfo} courseInfo={courseInfo} currentCourses={currentCourses} previousCourses={previousCourses} />
+      :
+      <div>555</div>
+      }
 
-
-              <div className="courses-list">
-
-                  
-                {Object.entries(currentCourses).map(([id,name]) => (
-                  <Link to={`/course/${id}`} >
-                    <div className="course">
-                      <p>{name}</p>
-                      <p>Active</p>
-                    </div>
-                  </Link>
-                ))}
-
-                 {Object.entries(previousCourses).map(([id,name]) => (
-                  <Link to={`/course/${id}`} >
-                    <div className="course">
-                      <p>{name}</p>
-                      <p>Complete</p>
-                    </div>
-                  </Link>
-                ))}
-
-
-       
-             
-                
-              </div>
-            </div>
-            <div className="calender-container">
-              <Calendar />
-            </div>
-          </div>
-          <h1 className="statistics-header">Statistics</h1>
-          <div className="statistics">
-            <div className="skills-charts chart">
-              <SkillChart userInfo={userInfo}/>
-            </div>
-            <div className="courses-charts chart">
-              <CourseChart userInfo={userInfo} courseInfo={courseInfo}  />
-            </div>
-          </div>
-        </div>
+   
+        
+      
       </>
     )
   }
