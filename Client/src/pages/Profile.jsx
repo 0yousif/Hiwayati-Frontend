@@ -27,9 +27,6 @@ const Profile = () => {
       console.log("courseInfo",courseInfo)
     }
 
-
-
-
     getUserInfo()
     getCourseInfo()
   }, [contextUser, userInfo !== null])
@@ -38,8 +35,6 @@ const Profile = () => {
   if (contextUser && userInfo) {
 
 
-
-    console.log("userInfo",userInfo)
     return (
       
       <>
