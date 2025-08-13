@@ -6,142 +6,46 @@ import SkillChart from "../components/Chart/SkillChart"
 import CourseChart from "../components/Chart/CourseChart"
 import axios from "axios"
 import Client from "../services/api"
+import Participant from "./Participant"
+import Teacher from "./Teacher"
 
 const Profile = () => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
   const [userInfo, setUserInfo] = useState(null)
+  const [courseInfo, setCourseInfo] = useState(null)
 
   useEffect(() => {
     const getUserInfo = async () => {
-      console.log(contextUser)
       if (contextUser){
         const res = await Client.get(`/auth/${contextUser.id}`)
         setUserInfo(res.data)
       }
     }
+
+    const getCourseInfo = async () => {
+      const res = await Client.get(`/course`)
+      setCourseInfo(res.data)
+      console.log("courseInfo",courseInfo)
+    }
+
     getUserInfo()
-  }, [contextUser])
+    getCourseInfo()
+  }, [contextUser, userInfo !== null])
   
 
   if (contextUser && userInfo) {
+
+
     return (
+      
       <>
-        <div className="profile-page">
-          <div className="about-user">
-            <div className="user-data">
-              <div className="profile-pic-container">
-                <img src="asd" alt="" />
-                <h1>1</h1>
-              </div>
-              <div className="courses-count">
-                <div>
-                  <p>Previous</p>
-                  <h3>{userInfo.previousCourses.length}</h3>
-                </div>
-                <div>
-                  <p>Current</p>
-                  <h3>{userInfo.currentCourses.length}</h3>
-                </div>
-              </div>
-              <div className="courses-list">
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-                <div className="course">
-                  <p>course name</p>
-                  <p>status</p>
-                </div>
-              </div>
-            </div>
-            <div className="calender-container">
-              <Calendar />
-            </div>
-          </div>
-          <h1 className="statistics-header">Statistics</h1>
-          <div className="statistics">
-            <div className="skills-charts chart">
-              <SkillChart />
-            </div>
-            <div className="courses-charts chart">
-              <CourseChart />
-            </div>
-          </div>
-        </div>
-      </>
+      { userInfo.currentCourses ?
+      <Participant userInfo={userInfo} courseInfo={courseInfo} />
+      :
+      <Teacher userInfo={userInfo} courseInfo={courseInfo} />
+      }
+     </>
     )
   }
 }
