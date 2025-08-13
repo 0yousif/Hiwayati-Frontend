@@ -49,7 +49,8 @@ const Course = ({ courseId }) => {
 
   useEffect(() => {
     getMessages()
-  }, [messages.length !== 0])
+    console.log("messages",messages)
+  }, [messages.length])
 
   const handleMessageChange = async (e) => {
     setMessage(e.target.value)
