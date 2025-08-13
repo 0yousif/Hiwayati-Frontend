@@ -35,6 +35,7 @@ const SignUp = () => {
       confirmPassword: formValues.confirmPassword,
       bio: formValues.bio,
     })
+    navigator("/signIn")
   }
   if (!contextUser) {
     if (formValues.isTeacher) {
