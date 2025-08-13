@@ -18,7 +18,7 @@ const CourseCard = ({ object, isTeacher, user }) => {
           <button>
             <Link to={`/course/${object._id}`}>More</Link>
           </button>
-          <button onClick={courseEnroll}>Enroll</button>
+          {isTeacher?null:<button onClick={courseEnroll}>Enroll</button> }
         </div>
       </div>
     </>

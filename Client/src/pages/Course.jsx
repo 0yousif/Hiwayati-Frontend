@@ -20,6 +20,7 @@ const Course = ({ courseId }) => {
     date: "",
     time: "",
     course_id: "",
+    duration: "",
   }
   const [eventValues, setEventValues] = useState(initialEventValues)
 
@@ -123,8 +124,12 @@ const Course = ({ courseId }) => {
           </div>
           {course.teacher._id === contextUser.id ? (
             <>
-              <button onClick={endCourse}>End course</button>
-              <button>Create Event</button>
+              {course.state === "running" ? (
+                <>
+                  <button onClick={endCourse}>End course</button>{" "}
+                  <button>Create Event</button>
+                </>
+              ) : null}
             </>
           ) : null}
           <div className="course-live-chat">
@@ -170,37 +175,47 @@ const Course = ({ courseId }) => {
             </div>
             <div className="participants-list"></div>
           </div>
-          <form className="new-event-form" onSubmit={handleNewEventSubmit}>
-            <button className="new-event-form-exit">X</button>
-            <label htmlFor="name">Title</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              onChange={handleEvnetChange}
-            />
-            <label htmlFor="description">Description</label>
-            <textarea
-              type="text"
-              name="description"
-              id="description"
-              onChange={handleEvnetChange}
-            ></textarea>
-            <label htmlFor="date">Date</label>
-            <input
-              type="date"
-              name="date"
-              id="date"
-              onChange={handleEvnetChange}
-            />
-            <input
-              type="time"
-              name="time"
-              id="time"
-              onChange={handleEvnetChange}
-            />
-            <button type="submit">Create</button>
-          </form>
+          {course.state === "running" ? (
+            <form className="new-event-form" onSubmit={handleNewEventSubmit}>
+              <button className="new-event-form-exit">X</button>
+              <label htmlFor="name">Title</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                onChange={handleEvnetChange}
+              />
+              <label htmlFor="description">Description</label>
+              <textarea
+                type="text"
+                name="description"
+                id="description"
+                onChange={handleEvnetChange}
+              ></textarea>
+              <label htmlFor="date">Date</label>
+              <input
+                type="date"
+                name="date"
+                id="date"
+                onChange={handleEvnetChange}
+              />
+              <label htmlFor="time">Date</label>
+              <input
+                type="time"
+                name="time"
+                id="time"
+                onChange={handleEvnetChange}
+              />
+              <label htmlFor="time">Duration</label>
+              <input
+                type="number"
+                name="duration"
+                id="duration"
+                onChange={handleEvnetChange}
+              />
+              <button type="submit">Create</button>
+            </form>
+          ) : null}
         </div>
       </>
     )

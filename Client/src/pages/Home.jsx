@@ -12,7 +12,7 @@ const Home = () => {
   if (contextUser && !objectsList) {
     const getObjectsList = async () => {
       const res = await Client.get(`/course`)
-      setObjectsList(res.data)
+      setObjectsList(res.data.filter((object) => object.state === "running"))
     }
     getObjectsList()
   }
@@ -24,7 +24,11 @@ const Home = () => {
       </div>
     )
   } else {
-    return <><h1>You are not authenticated</h1></>
+    return (
+      <>
+        <h1>You are not authenticated</h1>
+      </>
+    )
   }
 }
 

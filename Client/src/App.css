@@ -319,7 +319,7 @@ body,
 
 .new-event-form {
   position: fixed;
-  height: 20rem;
+  height: auto;
   width: 20rem;
   display: flex;
   flex-direction: column;

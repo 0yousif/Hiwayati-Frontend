@@ -13,7 +13,7 @@ const CoursesList = ({ objectsList }) => {
     const getUser = async () => {
       await Client.get(`/auth/${contextUser.id}`).then((res) => {
         setUser(res.data)
-        console.log(user)
+        console.log(res.data)
         if (res.data.courses) {
           setIsTeacher(true)
         } else {
@@ -30,7 +30,7 @@ const CoursesList = ({ objectsList }) => {
       <>
         <div className="courses-card">
           {objectsList.map((courseObject) => (
-            <CourseCard  object={courseObject} />
+            <CourseCard  object={courseObject} isTeacher={isTeacher} />
           ))}
         </div>
       </>
