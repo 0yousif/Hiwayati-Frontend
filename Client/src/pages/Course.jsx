@@ -6,7 +6,6 @@ import Client from "../services/api"
 import io from "socket.io-client"
 const socket = io("http://localhost:5000")
 import { getCourse } from "../services/course"
-
 const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()

@@ -21,7 +21,6 @@ const Nav = ({ setUser, user }) => {
               <NavLink onClick={SignOut}>Sign out</NavLink>
               <NavLink to="/">Home</NavLink>
               <NavLink to="/profile">Profile</NavLink>
-              <NavLink to="/course">Course</NavLink>
             </>
           ) : (
             <>
