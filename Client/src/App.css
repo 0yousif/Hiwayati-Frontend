@@ -294,3 +294,24 @@ body,
 .react-calendar{
   width: 90%;  
 }
+
+
+/* New Event Form  */
+
+.new-event-form {
+  position: fixed;
+  height: 20rem;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  right: 50%;
+  background-color: rgb(77, 77, 77);
+  color:  white;
+  padding: 0.75rem;
+  gap: 0.25rem;
+}
+
+.new-event-form-exit {
+  width: 1.75rem;
+  height: 1.75rem;
+}

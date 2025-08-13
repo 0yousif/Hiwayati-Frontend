@@ -13,6 +13,35 @@ const Course = ({ courseId }) => {
   const [messages, setMessages] = useState([])
   const [course, setCourse] = useState(null)
 
+  // new event form stuff
+  const initialEventValues = {
+    name: "",
+    description: "",
+    date: "",
+    time: "",
+    course_id: "",
+  }
+  const [eventValues, setEventValues] = useState(initialEventValues )
+
+  const handleEvnetChange = (e) => {
+    setEventValues({ ...eventValues, [e.target.name]: e.target.value })
+  }
+  const handleNewEventSubmit = async (e) => {
+    e.preventDefault()
+    if (parseInt(eventValues.time.split(":")[0]) > 12) {
+      const time = `${parseInt(eventValues.time.split(":")[0]) - 12}:${parseInt(
+        eventValues.time.split(":")[1]
+      )} PM`
+      setEventValues({
+        ...eventValues,
+        time,
+      })
+    }
+
+    console.log(eventValues)
+    const res = await Client.post(`/course/${id}/event`,eventValues)
+    console.log(res)
+  }
   useEffect(() => {
     const getCourseById = async () => {
       const res = await getCourse(id)
@@ -28,6 +57,11 @@ const Course = ({ courseId }) => {
     // console.log("message from the course", messages)
   }
 
+  const endCourse = async () => {
+    const res = await Client.post(`/course/${id}/end`)
+    console.log(res)
+  }
+  const createEvent = async () => {}
   // Sockets
 
   socket.on("receiveMessage", (msg, username, messageCourseId) => {
@@ -61,7 +95,6 @@ const Course = ({ courseId }) => {
       content: message,
     })
     sendMessage(message)
-    // setMessage("")
   }
 
   if (!course) {
@@ -95,6 +128,12 @@ const Course = ({ courseId }) => {
               ))}
             </div>
           </div>
+          {course.teacher._id === contextUser.id ? (
+            <>
+              <button onClick={endCourse}>End course</button>
+              <button>Create Event</button>
+            </>
+          ) : null}
           <div className="course-live-chat">
             <div className="live-chat">
               <div className="messages">
@@ -109,21 +148,62 @@ const Course = ({ courseId }) => {
                     ))
                   : null}
               </div>
-              <form action="">
-                <input
-                  onChange={handleMessageChange}
-                  type="text"
-                  name="content"
-                  id="content"
-                  value={message}
-                />
-                <button type="submit" onClick={handleMessageSubmit}>
-                  send
-                </button>
+              <form action="" onSubmit={handleMessageSubmit}>
+                {course.state === "done" ? (
+                  <input
+                    onChange={handleMessageChange}
+                    type="text"
+                    name="content"
+                    id="content"
+                    value={message}
+                    readOnly
+                  />
+                ) : (
+                  <input
+                    onChange={handleMessageChange}
+                    type="text"
+                    name="content"
+                    id="content"
+                    value={message}
+                  />
+                )}
+
+                <button type="submit">send</button>
               </form>
             </div>
             <div className="participants-list"></div>
           </div>
+          <form className="new-event-form" onSubmit={handleNewEventSubmit}>
+            <button className="new-event-form-exit">X</button>
+            <label htmlFor="name">Title</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              onChange={handleEvnetChange}
+            />
+            <label htmlFor="description">Description</label>
+            <textarea
+              type="text"
+              name="description"
+              id="description"
+              onChange={handleEvnetChange}
+            ></textarea>
+            <label htmlFor="date">Date</label>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              onChange={handleEvnetChange}
+            />
+            <input
+              type="time"
+              name="time"
+              id="time"
+              onChange={handleEvnetChange}
+            />
+            <button type="submit">Create</button>
+          </form>
         </div>
       </>
     )

@@ -14,8 +14,11 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      const res = await Client.get(`/auth/${contextUser.id}`)
-      setUserInfo(res.data)
+      console.log(contextUser)
+      if (contextUser){
+        const res = await Client.get(`/auth/${contextUser.id}`)
+        setUserInfo(res.data)
+      }
     }
     getUserInfo()
   }, [contextUser])
