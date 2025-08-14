@@ -34,14 +34,13 @@ const SignIn = ({ setUser }) => {
     }
   }
 
-  // useEffect(()=>{},[contextUser])
 
 
   if (!contextUser) {
     return (
       <>
-        <div className="sing-in-form-container">
-          <form action="" className="sing-in-form" onSubmit={handleSubmit}>
+        <div className="sing-in-form-container  ">
+          <form action="" className="sing-in-form light-shadow-box" onSubmit={handleSubmit}>
             <label htmlFor="username">Email</label>
             <input
               type="text"

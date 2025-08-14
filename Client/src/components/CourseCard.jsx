@@ -10,8 +10,8 @@ const CourseCard = ({ object, isTeacher, user }) => {
 
   return (
     <>
-      <div className="course-card">
-        <div className="course-image-cotainer"></div>
+      <div className="course-card light-shadow-box">
+        <div className="course-image-cotainer"><img src={object.image} alt="" /></div>
         <h3>{object.name}</h3>
         <p>{object.description}</p>
         <div className="course-buttons">

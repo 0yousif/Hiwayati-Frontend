@@ -1,4 +1,4 @@
-import { useState,useContext } from "react"
+import { useState, useContext } from "react"
 import { RegisterUser } from "../services/auth"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
@@ -10,14 +10,15 @@ const SignUp = () => {
     isTeacher: false,
     email: "",
     bio: "",
-    image: null,
+    image: "",
   }
   const [formValues, setformValues] = useState(initialValues)
   const { setContextUser } = useContext(UserContext)
   const { contextUser } = useContext(UserContext)
   const navigator = useNavigate()
+
   const handleChange = (e) => {
-    if (e.target.name !== "image" && e.target.name !== "isTeacher") {
+    if (e.target.name !== "isTeacher") {
       setformValues({ ...formValues, [e.target.name]: e.target.value })
     } else if (e.target.name === "isTeacher") {
       setformValues({ ...formValues, [e.target.name]: e.target.checked })
@@ -26,6 +27,15 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log({
+      username: formValues.username,
+      isTeacher: formValues.isTeacher,
+      email: formValues.email,
+      password: formValues.password,
+      confirmPassword: formValues.confirmPassword,
+      bio: formValues.bio,
+      image: formValues.image,
+    })
     await axios.post("http://127.0.0.1:3000/auth/signUp", {
       username: formValues.username,
       isTeacher: formValues.isTeacher,
@@ -33,6 +43,7 @@ const SignUp = () => {
       password: formValues.password,
       confirmPassword: formValues.confirmPassword,
       bio: formValues.bio,
+      image: formValues.image,
     })
     navigator("/signIn")
   }
@@ -40,9 +51,9 @@ const SignUp = () => {
     if (formValues.isTeacher) {
       return (
         <>
-          <div className="sing-in-form-container">
+          <div className=" sing-in-form-container ">
             <form
-              className="sing-in-form"
+              className="sing-in-form light-shadow-box"
               onSubmit={handleSubmit}
               encType="multipart/form-data"
             >
@@ -69,6 +80,13 @@ const SignUp = () => {
                 onChange={handleChange}
                 rows={3}
               ></textarea>
+                <label htmlFor="image">Profile Pic</label>
+                <input
+                  type="text"
+                  name="image"
+                  id="image"
+                  onChange={handleChange}
+                />
 
               <label htmlFor="password">Password</label>
               <input
@@ -96,9 +114,7 @@ const SignUp = () => {
                   onChange={handleChange}
                 />
               </label>
-              <label htmlFor="image">Profile Pic</label>
-              <input type="file" name="image" id="image" />
-              <button type="submit">Sign In</button>
+              <button type="submit">Sign up</button>
             </form>
           </div>
         </>
@@ -106,10 +122,10 @@ const SignUp = () => {
     } else {
       return (
         <>
-          <div className="sing-in-form-container">
+          <div className="sing-in-form-container ">
             <form
               action=""
-              className="sing-in-form"
+              className="sing-in-form light-shadow-box"
               onSubmit={handleSubmit}
               encType="multipart/form-data"
             >
@@ -136,6 +152,13 @@ const SignUp = () => {
                 onChange={handleChange}
                 rows={3}
               ></textarea>
+              <label htmlFor="image">Profile Pic</label>
+              <input
+                type="text"
+                name="image"
+                id="image"
+                onChange={handleChange}
+              />
 
               <label htmlFor="password">Password</label>
               <input
@@ -162,14 +185,16 @@ const SignUp = () => {
                   onChange={handleChange}
                 />
               </label>
-              <button type="submit">Sign In</button>
+              <button type="submit">Sign up</button>
             </form>
           </div>
         </>
       )
     }
   } else {
-    navigator("/profile")
+    ;<>
+      <h1>Opps looks like you are not supposed to be here!</h1>
+    </>
   }
 }
 

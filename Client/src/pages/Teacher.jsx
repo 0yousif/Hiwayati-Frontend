@@ -49,50 +49,25 @@ const Teacher = ({ userInfo, courseInfo }) => {
   return (
     <>
       <div className="profile-page">
-        <form
-          className="new-course-teacher-form"
-          onSubmit={submitNewCourseHandler}
-        >
-          <label htmlFor="name">Name</label>
-          <input onChange={changeHandler} type="text" name="name" id="name" />
-          <label htmlFor="description">Description</label>
-          <input
-            onChange={changeHandler}
-            type="text"
-            name="description"
-            id="description"
-          />
-          <label htmlFor="skills">Skills</label>
-          <MultiSelect
-            value={selectedSkills}
-            onChange={changeHandler}
-            options={skills}
-            optionLabel="name"
-            placeholder="Select Cities"
-            name="skills"
-            className="w-full md:w-20rem"
-          />
-          <button type="submit">Submit</button>
-        </form>
         <div className="about-user">
           <div className="user-data">
             <div className="profile-pic-container">
-              <img src="asd" alt="" />
+              <img src={userInfo.image} alt="" />
               <h1>Teacher</h1>
             </div>
-            <div className="courses-count">
-              <div>
-                <p>Current</p>
+            <div className="courses-count ">
+              <div className="light-shadow-box">
+                <p>Courses</p>
                 <h3>{userInfo.courses.length}</h3>
               </div>
             </div>
 
-            <div className="courses-list">
+            <div className="courses-list light-shadow-box">
               {allCourses.map((course) => (
                 <Link to={`/course/${course.id}`}>
                   <div className="course">
                     <p>{course.name}</p>
-                    <p>Active</p>
+                    <p>{console.log(course.state)}</p>
                   </div>
                 </Link>
               ))}
@@ -102,13 +77,47 @@ const Teacher = ({ userInfo, courseInfo }) => {
             <Calendar userInfo={userInfo} />
           </div>
         </div>
-        <h1 className="statistics-header">Statistics</h1>
+        <h1 className="statistics-header">Add new course</h1>
         <div className="statistics">
-          <div className="skills-charts chart">
+          <div className="skills-charts chart light-shadow-box">
             {/* <SkillChart userInfo={userInfo} /> */}
-          </div>
-          <div className="courses-charts chart">
-            {/* <CourseChart userInfo={userInfo} courseInfo={courseInfo} /> */}
+            <form
+              className="new-course-teacher-form"
+              onSubmit={submitNewCourseHandler}
+            >
+              <label htmlFor="name">Name</label>
+              <input
+                onChange={changeHandler}
+                type="text"
+                name="name"
+                id="name"
+              />
+              <label htmlFor="description">Description</label>
+              <input
+                onChange={changeHandler}
+                type="text"
+                name="description"
+                id="description"
+              />
+              <label htmlFor="image">image</label>
+              <input
+                onChange={changeHandler}
+                type="text"
+                name="image"
+                id="image"
+              />
+              <label htmlFor="skills">Skills</label>
+              <MultiSelect
+                value={selectedSkills}
+                onChange={changeHandler}
+                options={skills}
+                optionLabel="name"
+                placeholder="Select Cities"
+                name="skills"
+                className="w-full md:w-20rem"
+              />
+              <button type="submit">Submit</button>
+            </form>
           </div>
         </div>
       </div>

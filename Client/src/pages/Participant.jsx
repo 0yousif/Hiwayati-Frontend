@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Calendar from './../components/Calendar'
 import SkillChart from '../components/Chart/SkillChart'
 import CourseChart from '../components/Chart/CourseChart'
+import { use } from 'react'
 
 const Participant = ({ userInfo, courseInfo }) => {
 
@@ -27,21 +28,21 @@ const Participant = ({ userInfo, courseInfo }) => {
         <div className="about-user">
           <div className="user-data">
             <div className="profile-pic-container">
-              <img src="asd" alt="" />
+              <img src={userInfo.image} alt="" />
               <h1>1</h1>
             </div>
             <div className="courses-count">
-              <div>
+              <div className='light-shadow-box'>
                 <p>Previous</p>
                 <h3>{userInfo.previousCourses.length}</h3>
               </div>
-              <div>
+              <div className='light-shadow-box'>
                 <p>Current</p>
                 <h3>{userInfo.currentCourses.length}</h3>
               </div>
             </div>
 
-            <div className="courses-list">
+            <div className="courses-list light-shadow-box">
               {Object.entries(currentCourses).map(([id, name]) => (
                 <Link to={`/course/${id}`}>
                   <div className="course">
@@ -67,10 +68,10 @@ const Participant = ({ userInfo, courseInfo }) => {
         </div>
         <h1 className="statistics-header">Statistics</h1>
         <div className="statistics">
-          <div className="skills-charts chart">
+          <div className="skills-charts chart light-shadow-box light-shadow-box">
             <SkillChart userInfo={userInfo} />
           </div>
-          <div className="courses-charts chart">
+          <div className="courses-charts chart light-shadow-box light-shadow-box">
             <CourseChart userInfo={userInfo} courseInfo={courseInfo} />
           </div>
         </div>

@@ -44,7 +44,7 @@ const Course = ({ courseId }) => {
   useEffect(() => {
     const getCourseById = async () => {
       const res = await getCourse(id)
-      setCourse(res)
+      setCourse(res) 
     }
     getCourseById()
   }, [])
@@ -56,9 +56,14 @@ const Course = ({ courseId }) => {
   }
 
   const endCourse = async () => {
-    const res = await Client.post(`/course/${id}/end`)
+    try {
+      const res = await Client.post(`/course/${id}/end`)
+      setCourse({ ...course, state: "done" })
+    } catch (error) {
+      throw error
+    }
   }
-  const createEvent = async () => {}
+
   // Sockets
 
   socket.on("receiveMessage", (msg, username, messageCourseId) => {
@@ -100,7 +105,7 @@ const Course = ({ courseId }) => {
       <>
         <div className="course-page">
           <div className="course-info">
-            <div className="course-image-container"></div>
+            <div className="course-image-container"><img src={course.image} alt="" /></div>
             <div className="written-datails">
               <h1 className="course-name">{course.name}</h1>
               <div className="written-datail">
@@ -113,7 +118,7 @@ const Course = ({ courseId }) => {
               </div>
               <div className="written-datail">
                 <h3>Teacher</h3>
-                <p>{course.teacher?.username}</p>
+                <p>{course.teacher?.id}</p>
               </div>
             </div>
             <div className="course-skills">
@@ -126,15 +131,14 @@ const Course = ({ courseId }) => {
             <>
               {course.state === "running" ? (
                 <>
-                  <button onClick={endCourse}>End course</button>{" "}
-                  <button>Create Event</button>
+                  <button onClick={endCourse} className="end-course-button">End course</button>{" "}
                 </>
               ) : null}
             </>
           ) : null}
           <div className="course-live-chat">
             <div className="live-chat">
-              <div className="messages">
+              <div className="messages light-shadow-box">
                 {messages
                   ? messages.map((message) => {
                       return (
@@ -175,9 +179,9 @@ const Course = ({ courseId }) => {
             </div>
             <div className="participants-list"></div>
           </div>
-          {course.state === "running" ? (
-            <form className="new-event-form" onSubmit={handleNewEventSubmit}>
-              <button className="new-event-form-exit">X</button>
+          {course.state   === "running" && contextUser.id.toString() === course.teacher?._id.toString()  ? (
+            <form className="new-event-form light-shadow-box" onSubmit={handleNewEventSubmit}>
+
               <label htmlFor="name">Title</label>
               <input
                 type="text"
