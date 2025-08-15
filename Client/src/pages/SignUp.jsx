@@ -36,7 +36,7 @@ const SignUp = () => {
       bio: formValues.bio,
       image: formValues.image,
     })
-    await axios.post("http://127.0.0.1:3000/auth/signUp", {
+    await axios.post("/auth/signUp", {
       username: formValues.username,
       isTeacher: formValues.isTeacher,
       email: formValues.email,
@@ -80,13 +80,13 @@ const SignUp = () => {
                 onChange={handleChange}
                 rows={3}
               ></textarea>
-                <label htmlFor="image">Profile Pic</label>
-                <input
-                  type="text"
-                  name="image"
-                  id="image"
-                  onChange={handleChange}
-                />
+              <label htmlFor="image">Profile Pic</label>
+              <input
+                type="text"
+                name="image"
+                id="image"
+                onChange={handleChange}
+              />
 
               <label htmlFor="password">Password</label>
               <input

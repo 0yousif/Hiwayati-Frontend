@@ -14,7 +14,7 @@ const Nav = ({ setUser, user }) => {
   return (
     <>
       <nav className="navigation-bar">
-        <img className="logo" src={logo} />
+        {/* <img className="logo" src={logo} /> */}
         <div className="links">
           {user ? (
             <>

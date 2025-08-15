@@ -53,7 +53,6 @@ const Teacher = ({ userInfo, courseInfo }) => {
           <div className="user-data">
             <div className="profile-pic-container">
               <img src={userInfo.image} alt="" />
-              <h1>Teacher</h1>
             </div>
             <div className="courses-count ">
               <div className="light-shadow-box">
@@ -112,7 +111,7 @@ const Teacher = ({ userInfo, courseInfo }) => {
                 onChange={changeHandler}
                 options={skills}
                 optionLabel="name"
-                placeholder="Select Cities"
+                placeholder="Select Skills"
                 name="skills"
                 className="w-full md:w-20rem"
               />

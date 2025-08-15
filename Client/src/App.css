@@ -126,8 +126,14 @@ body,
   aspect-ratio: 4/3;
   /* height: auto; */
   padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.calender-container button {
+  color: black;
+}
 .profile-pic-container {
   height: 80%;
   aspect-ratio: 1/1;
@@ -337,8 +343,9 @@ body,
 /* New Event Form  */
 
 .new-event-form {
-  position: fixed;
+  /* position: fixed; */
   height: auto;
+  height: 20rem;
   width: 20rem;
   display: flex;
   flex-direction: column;
@@ -374,6 +381,10 @@ button {
   border: none;
   border-radius: 10px;
   color: white;
+}
+button:active{
+  
+  background-color: rgb(62, 18, 78);
 }
 .profile-pic-container img {
   height: 100%;

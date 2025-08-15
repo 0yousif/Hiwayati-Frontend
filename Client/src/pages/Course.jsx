@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useEffect } from "react"
 import Client from "../services/api"
 import io from "socket.io-client"
-const socket = io("http://localhost:5000")
+const socket = io("https://hiwayati-7efbc0ac9205.herokuapp.com:5000")
 import { getCourse } from "../services/course"
 const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
@@ -44,7 +44,7 @@ const Course = ({ courseId }) => {
   useEffect(() => {
     const getCourseById = async () => {
       const res = await getCourse(id)
-      setCourse(res) 
+      setCourse(res)
     }
     getCourseById()
   }, [])
@@ -94,6 +94,7 @@ const Course = ({ courseId }) => {
       content: message,
     })
     sendMessage(message)
+    setMessage("")
   }
 
   if (!course) {
@@ -105,7 +106,9 @@ const Course = ({ courseId }) => {
       <>
         <div className="course-page">
           <div className="course-info">
-            <div className="course-image-container"><img src={course.image} alt="" /></div>
+            <div className="course-image-container">
+              <img src={course.image} alt="" />
+            </div>
             <div className="written-datails">
               <h1 className="course-name">{course.name}</h1>
               <div className="written-datail">
@@ -118,7 +121,7 @@ const Course = ({ courseId }) => {
               </div>
               <div className="written-datail">
                 <h3>Teacher</h3>
-                <p>{course.teacher?.id}</p>
+                <p>{course.teacher?.username}</p>
               </div>
             </div>
             <div className="course-skills">
@@ -131,8 +134,54 @@ const Course = ({ courseId }) => {
             <>
               {course.state === "running" ? (
                 <>
-                  <button onClick={endCourse} className="end-course-button">End course</button>{" "}
+                  <button onClick={endCourse} className="end-course-button">
+                    End course
+                  </button>{" "}
                 </>
+              ) : null}
+              {course.state === "running" &&
+              contextUser.id.toString() === course.teacher?._id.toString() ? (
+                <form
+                  className="new-event-form light-shadow-box"
+                  onSubmit={handleNewEventSubmit}
+                >
+                  <label htmlFor="name">Title</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    onChange={handleEvnetChange}
+                  />
+                  <label htmlFor="description">Description</label>
+                  <textarea
+                    type="text"
+                    name="description"
+                    id="description"
+                    onChange={handleEvnetChange}
+                  ></textarea>
+                  <label htmlFor="date">Date</label>
+                  <input
+                    type="date"
+                    name="date"
+                    id="date"
+                    onChange={handleEvnetChange}
+                  />
+                  <label htmlFor="time">Date</label>
+                  <input
+                    type="time"
+                    name="time"
+                    id="time"
+                    onChange={handleEvnetChange}
+                  />
+                  <label htmlFor="time">Duration</label>
+                  <input
+                    type="number"
+                    name="duration"
+                    id="duration"
+                    onChange={handleEvnetChange}
+                  />
+                  <button type="submit">Create</button>
+                </form>
               ) : null}
             </>
           ) : null}
@@ -179,47 +228,6 @@ const Course = ({ courseId }) => {
             </div>
             <div className="participants-list"></div>
           </div>
-          {course.state   === "running" && contextUser.id.toString() === course.teacher?._id.toString()  ? (
-            <form className="new-event-form light-shadow-box" onSubmit={handleNewEventSubmit}>
-
-              <label htmlFor="name">Title</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                onChange={handleEvnetChange}
-              />
-              <label htmlFor="description">Description</label>
-              <textarea
-                type="text"
-                name="description"
-                id="description"
-                onChange={handleEvnetChange}
-              ></textarea>
-              <label htmlFor="date">Date</label>
-              <input
-                type="date"
-                name="date"
-                id="date"
-                onChange={handleEvnetChange}
-              />
-              <label htmlFor="time">Date</label>
-              <input
-                type="time"
-                name="time"
-                id="time"
-                onChange={handleEvnetChange}
-              />
-              <label htmlFor="time">Duration</label>
-              <input
-                type="number"
-                name="duration"
-                id="duration"
-                onChange={handleEvnetChange}
-              />
-              <button type="submit">Create</button>
-            </form>
-          ) : null}
         </div>
       </>
     )

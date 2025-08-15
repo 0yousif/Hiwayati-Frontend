@@ -29,7 +29,6 @@ const Participant = ({ userInfo, courseInfo }) => {
           <div className="user-data">
             <div className="profile-pic-container">
               <img src={userInfo.image} alt="" />
-              <h1>1</h1>
             </div>
             <div className="courses-count">
               <div className='light-shadow-box'>
