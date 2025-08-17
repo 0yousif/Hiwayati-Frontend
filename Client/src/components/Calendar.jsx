@@ -5,12 +5,23 @@ import 'react-calendar/dist/Calendar.css'
 const Calendar = ({ userInfo }) => {
   const events = {}
 
-  userInfo.currentCourses.forEach((currentCourse) => {
-    currentCourse.course?.events?.forEach((event) => {
-      const eventKey = new Date(event.date).toISOString().split('T')[0]
-      events[eventKey] = { name: event.name, time: event.time }
+  console.log("userInfo",userInfo)
+  if (!userInfo.courses){
+
+    userInfo.currentCourses.forEach((currentCourse) => {
+      currentCourse.course?.events?.forEach((event) => {
+        const eventKey = new Date(event.date).toISOString().split('T')[0]
+        events[eventKey] = { name: event.name, time: event.time }
+      })
     })
-  })
+  }else {
+    userInfo.courses.forEach((course) => {
+      course.events?.forEach((event) => {
+        const eventKey = new Date(event.date).toISOString().split('T')[0]
+        events[eventKey] = { name: event.name, time: event.time }
+      })
+    })
+  }
 
   const [date, setDate] = useState(new Date())
 

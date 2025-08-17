@@ -17,7 +17,7 @@ const Profile = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      if (contextUser){
+      if (contextUser) {
         const res = await Client.get(`/auth/${contextUser.id}`)
         setUserInfo(res.data)
       }
@@ -26,26 +26,21 @@ const Profile = () => {
     const getCourseInfo = async () => {
       const res = await Client.get(`/course`)
       setCourseInfo(res.data)
-      console.log("courseInfo",courseInfo)
     }
 
     getUserInfo()
     getCourseInfo()
   }, [contextUser, userInfo !== null])
-  
 
   if (contextUser && userInfo) {
-
-
     return (
-      
       <>
-      { userInfo.currentCourses ?
-      <Participant userInfo={userInfo} courseInfo={courseInfo} />
-      :
-      <Teacher userInfo={userInfo} courseInfo={courseInfo} />
-      }
-     </>
+        {userInfo.currentCourses ? (
+          <Participant userInfo={userInfo} courseInfo={courseInfo} />
+        ) : (
+          <Teacher userInfo={userInfo} courseInfo={courseInfo} />
+        )}
+      </>
     )
   }
 }

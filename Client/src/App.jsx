@@ -32,7 +32,6 @@ const App = () => {
   return (
     <>
       <Nav setUser={setUser} user={user}></Nav>
-      <h1>user{user ? user.username : ""}</h1>
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

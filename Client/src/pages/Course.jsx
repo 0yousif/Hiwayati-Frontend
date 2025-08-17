@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useEffect } from "react"
 import Client from "../services/api"
 import io from "socket.io-client"
-const socket = io("http://localhost:5000")
+const socket = io("https://hiwayati-7efbc0ac9205.herokuapp.com:5000")
 import { getCourse } from "../services/course"
 const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
@@ -20,8 +20,9 @@ const Course = ({ courseId }) => {
     date: "",
     time: "",
     course_id: "",
+    duration: "",
   }
-  const [eventValues, setEventValues] = useState(initialEventValues )
+  const [eventValues, setEventValues] = useState(initialEventValues)
 
   const handleEvnetChange = (e) => {
     setEventValues({ ...eventValues, [e.target.name]: e.target.value })
@@ -38,9 +39,7 @@ const Course = ({ courseId }) => {
       })
     }
 
-    console.log(eventValues)
-    const res = await Client.post(`/course/${id}/event`,eventValues)
-    console.log(res)
+    const res = await Client.post(`/course/${id}/event`, eventValues)
   }
   useEffect(() => {
     const getCourseById = async () => {
@@ -54,36 +53,35 @@ const Course = ({ courseId }) => {
   const getMessages = async () => {
     const res = await Client.get(`/course/${id}/messages`)
     setMessages(res.data)
-    // console.log("message from the course", messages)
   }
 
   const endCourse = async () => {
-    const res = await Client.post(`/course/${id}/end`)
-    console.log(res)
+    try {
+      const res = await Client.post(`/course/${id}/end`)
+      setCourse({ ...course, state: "done" })
+    } catch (error) {
+      throw error
+    }
   }
-  const createEvent = async () => {}
+
   // Sockets
 
   socket.on("receiveMessage", (msg, username, messageCourseId) => {
-    console.log(messageCourseId, id)
     if (messageCourseId === id) {
       const newMessage = {
         userId: { username: username },
         content: msg,
       }
-      console.log(messages)
       setMessages([...messages, newMessage])
     }
   })
 
   const sendMessage = (message) => {
-    console.log(id)
     socket.emit("sendMessage", message, contextUser.username, id)
   }
 
   useEffect(() => {
     getMessages()
-    console.log("messages",messages)
   }, [messages.length])
 
   const handleMessageChange = async (e) => {
@@ -96,19 +94,21 @@ const Course = ({ courseId }) => {
       content: message,
     })
     sendMessage(message)
+    setMessage("")
   }
 
   if (!course) {
     return <h1>...loding</h1>
   }
 
-  if (contextUser ) {
-    
+  if (contextUser) {
     return (
       <>
         <div className="course-page">
           <div className="course-info">
-            <div className="course-image-container"></div>
+            <div className="course-image-container">
+              <img src={course.image} alt="" />
+            </div>
             <div className="written-datails">
               <h1 className="course-name">{course.name}</h1>
               <div className="written-datail">
@@ -132,24 +132,75 @@ const Course = ({ courseId }) => {
           </div>
           {course.teacher._id === contextUser.id ? (
             <>
-              <button onClick={endCourse}>End course</button>
-              <button>Create Event</button>
+              {course.state === "running" ? (
+                <>
+                  <button onClick={endCourse} className="end-course-button">
+                    End course
+                  </button>{" "}
+                </>
+              ) : null}
+              {course.state === "running" &&
+              contextUser.id.toString() === course.teacher?._id.toString() ? (
+                <form
+                  className="new-event-form light-shadow-box"
+                  onSubmit={handleNewEventSubmit}
+                >
+                  <label htmlFor="name">Title</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    onChange={handleEvnetChange}
+                  />
+                  <label htmlFor="description">Description</label>
+                  <textarea
+                    type="text"
+                    name="description"
+                    id="description"
+                    onChange={handleEvnetChange}
+                  ></textarea>
+                  <label htmlFor="date">Date</label>
+                  <input
+                    type="date"
+                    name="date"
+                    id="date"
+                    onChange={handleEvnetChange}
+                  />
+                  <label htmlFor="time">Date</label>
+                  <input
+                    type="time"
+                    name="time"
+                    id="time"
+                    onChange={handleEvnetChange}
+                  />
+                  <label htmlFor="time">Duration</label>
+                  <input
+                    type="number"
+                    name="duration"
+                    id="duration"
+                    onChange={handleEvnetChange}
+                  />
+                  <button type="submit">Create</button>
+                </form>
+              ) : null}
             </>
           ) : null}
           <div className="course-live-chat">
             <div className="live-chat">
-              <div className="messages">
+              <div className="messages light-shadow-box">
                 {messages
                   ? messages.map((message) => {
-                    {console.log(message)}
-                    
-      return <><div className="message">
-        <h3 className="message-owner">
-          {message.userId.username}
-        </h3>
-  <p className="message-content">{message.content}</p>
-    </div>
-            </>})
+                      return (
+                        <>
+                          <div className="message">
+                            <h3 className="message-owner">
+                              {message.userId.username}
+                            </h3>
+                            <p className="message-content">{message.content}</p>
+                          </div>
+                        </>
+                      )
+                    })
                   : null}
               </div>
               <form action="" onSubmit={handleMessageSubmit}>
@@ -177,37 +228,6 @@ const Course = ({ courseId }) => {
             </div>
             <div className="participants-list"></div>
           </div>
-          <form className="new-event-form" onSubmit={handleNewEventSubmit}>
-            <button className="new-event-form-exit">X</button>
-            <label htmlFor="name">Title</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              onChange={handleEvnetChange}
-            />
-            <label htmlFor="description">Description</label>
-            <textarea
-              type="text"
-              name="description"
-              id="description"
-              onChange={handleEvnetChange}
-            ></textarea>
-            <label htmlFor="date">Date</label>
-            <input
-              type="date"
-              name="date"
-              id="date"
-              onChange={handleEvnetChange}
-            />
-            <input
-              type="time"
-              name="time"
-              id="time"
-              onChange={handleEvnetChange}
-            />
-            <button type="submit">Create</button>
-          </form>
         </div>
       </>
     )

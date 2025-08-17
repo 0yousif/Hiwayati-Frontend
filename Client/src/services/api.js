@@ -1,6 +1,6 @@
 import Axios from "axios"
 
-export const BASE_URL = "http://localhost:3000"
+export const BASE_URL = "https://hiwayati-7efbc0ac9205.herokuapp.com"
 
 const Client = Axios.create({ baseURL: BASE_URL })
 // Intercepts every request axios makes
@@ -17,7 +17,6 @@ Client.interceptors.request.use(
     // Provides the token to each request that passes through axios
   },
   async (error) => {
-    console.log({ msg: "Axios Interceptor Error!", error })
     throw error
   }
 )
