@@ -5,11 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npx surge --project ./dist --domain 'hiwayati2.surge.sh'",
+    "build": "vite build && npx surge --project ./dist --domain 'roomy-driving.surge.sh'",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "npm run build && mv build/index.html build/200.html && surge build"
-
   },
   "dependencies": {
     "axios": "^1.11.0",
