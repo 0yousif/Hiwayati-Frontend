@@ -44,7 +44,6 @@ const ChartCrater = ({labels,values,type,id}) => {
 
   return (
     <>
-      {/* here the contianere of chart, an example if you have div with specift hight and width, return <div id="the id"></div> */}
       <div style={{ height: 500 }}>
         <canvas id={`${id}`} ></canvas>
       </div>

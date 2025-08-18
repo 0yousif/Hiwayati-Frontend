@@ -23,7 +23,6 @@ const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token")
-    // Check if token exists before requesting to validate the token
     if (token) {      
       checkToken()
     }
