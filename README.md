@@ -12,7 +12,12 @@
 
 ### Our project is a full-stack application. The idea behind this app is to create a bridge between providers who offer programs and participants who need help with a specific course. In our platform, each course has a live chat so participants and providers can communicate easily. We also provide visual statistics to show each participant’s progress, making it easier to track learning and improvements.
 
-## Getting Started
+# Getting Started
+
+On the home page , the participants will see the recommended courses based on the skills,
+aftre click in enroll(More for course page that show details of course), the page will move to the profile that show the details of the participants and calendar that show events, on the course page that show details of course and chat with pepole on the same course.
+
+## Technologies Used
 
 - **MERN Stack** – Combination of MongoDB, Express, React, and Node for full-stack development
 - **React** – Frontend UI library for building interactive interfaces
