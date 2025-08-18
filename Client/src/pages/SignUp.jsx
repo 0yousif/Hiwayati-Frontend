@@ -27,7 +27,6 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log({
       username: formValues.username,
       isTeacher: formValues.isTeacher,
       email: formValues.email,

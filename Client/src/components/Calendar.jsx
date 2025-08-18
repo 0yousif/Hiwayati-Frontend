@@ -5,7 +5,6 @@ import 'react-calendar/dist/Calendar.css'
 const Calendar = ({ userInfo }) => {
   const events = {}
 
-  console.log("userInfo",userInfo)
   if (!userInfo.courses){
 
     userInfo.currentCourses.forEach((currentCourse) => {

@@ -34,7 +34,6 @@ const Teacher = ({ userInfo, courseInfo }) => {
     if (e.target.name === "skills") {
       setSelectedSkills(e.value)
       setFormValues({ ...formValues, [e.target.name]: selectedSkills })
-      console.log(selectedSkills)
     } else {
       setFormValues({ ...formValues, [e.target.name]: e.target.value })
     }
@@ -45,7 +44,6 @@ const Teacher = ({ userInfo, courseInfo }) => {
     await Client.post(`/course`, formValues)
   }
 
-  console.log(userInfo)
   return (
     <>
       <div className="profile-page">
@@ -66,7 +64,7 @@ const Teacher = ({ userInfo, courseInfo }) => {
                 <Link to={`/course/${course.id}`}>
                   <div className="course">
                     <p>{course.name}</p>
-                    <p>{console.log(course.state)}</p>
+                    <p>{course.state}</p>
                   </div>
                 </Link>
               ))}
