@@ -90,7 +90,7 @@ const Course = ({ courseId }) => {
 
   const handleMessageSubmit = async (e) => {
     e.preventDefault()
-    await Client.post(`/course/${id}/messages`, {
+    await Client.post(`/course/${id}/message`, {
       content: message,
     })
     sendMessage(message)
