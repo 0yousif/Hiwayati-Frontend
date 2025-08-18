@@ -27,14 +27,6 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-      username: formValues.username,
-      isTeacher: formValues.isTeacher,
-      email: formValues.email,
-      password: formValues.password,
-      confirmPassword: formValues.confirmPassword,
-      bio: formValues.bio,
-      image: formValues.image,
-    })
     await axios.post("/auth/signUp", {
       username: formValues.username,
       isTeacher: formValues.isTeacher,

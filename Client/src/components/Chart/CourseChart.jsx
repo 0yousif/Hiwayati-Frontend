@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { Chart } from 'chart.js/auto'
+import { useEffect, useRef, useState } from "react"
+import { Chart } from "chart.js/auto"
 
 const CourseChart = ({ userInfo }) => {
   const canvasRef = useRef(null)
@@ -11,8 +11,6 @@ const CourseChart = ({ userInfo }) => {
   let previousCourses = []
 
   useEffect(() => {
-
-
     const getCurrentCourses = () => {
       let course = []
       for (let i = 0; i < userInfo.currentCourses.length; i++) {
@@ -20,7 +18,7 @@ const CourseChart = ({ userInfo }) => {
         courseKey.push(userInfo.currentCourses[i].course.name)
         courseValue.push(userInfo.currentCourses[i].hours)
       }
-      
+
       currentCourses = [...course]
     }
 
@@ -32,40 +30,38 @@ const CourseChart = ({ userInfo }) => {
         courseValue.push(userInfo.previousCourses[i].hours)
       }
       previousCourses = [...course]
-      
-    
     }
 
     getCurrentCourses()
     getPreviousCourses()
 
     if (currentCourses) {
-      const ctx = canvasRef.current.getContext('2d')
+      const ctx = canvasRef.current.getContext("2d")
 
       const chartInstance = new Chart(ctx, {
-        type: 'bar',
+        type: "bar",
         data: {
           labels: courseKey,
           datasets: [
             {
-              label: 'Hours',
+              label: "Hours",
               data: courseValue,
               backgroundColor: [
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(153, 102, 255, 0.6)'
-              ]
-            }
-          ]
+                "rgba(54, 162, 235, 0.6)",
+                "rgba(255, 99, 132, 0.6)",
+                "rgba(75, 192, 192, 0.6)",
+                "rgba(255, 206, 86, 0.6)",
+                "rgba(153, 102, 255, 0.6)",
+              ],
+            },
+          ],
         },
         options: {
           responsive: true,
           plugins: {
-            legend: { position: 'top' }
-          }
-        }
+            legend: { position: "top" },
+          },
+        },
       })
 
       return () => {

@@ -1,20 +1,13 @@
 import { useEffect } from "react"
 import Chart from "chart.js/auto"
 
-
-const ChartCrater = ({labels,values,type,id}) => {
-
-  
+const ChartCrater = ({ labels, values, type, id }) => {
   useEffect(() => {
-    
     const CreateCharter = () => {
-
-      
       const ctx = document.getElementById(id)
 
-      
-       const existing = Chart.getChart(ctx)
-       if (existing) existing.destroy()
+      const existing = Chart.getChart(ctx)
+      if (existing) existing.destroy()
 
       new Chart(ctx, {
         type: type,
@@ -45,9 +38,8 @@ const ChartCrater = ({labels,values,type,id}) => {
   return (
     <>
       <div style={{ height: 500 }}>
-        <canvas id={`${id}`} ></canvas>
+        <canvas id={`${id}`}></canvas>
       </div>
-
     </>
   )
 }

@@ -34,13 +34,15 @@ const SignIn = ({ setUser }) => {
     }
   }
 
-
-
   if (!contextUser) {
     return (
       <>
         <div className="sing-in-form-container  ">
-          <form action="" className="sing-in-form light-shadow-box" onSubmit={handleSubmit}>
+          <form
+            action=""
+            className="sing-in-form light-shadow-box"
+            onSubmit={handleSubmit}
+          >
             <label htmlFor="username">Email</label>
             <input
               type="text"
@@ -69,7 +71,7 @@ const SignIn = ({ setUser }) => {
         </div>
       </>
     )
-  }else{
+  } else {
     navigator("/profile")
   }
 }

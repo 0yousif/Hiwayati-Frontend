@@ -1,6 +1,5 @@
 import Client from "./api"
 
-
 export const getCourse = async (courseId) => {
   try {
     const res = await Client.get(`/course/${courseId}`)
@@ -10,11 +9,8 @@ export const getCourse = async (courseId) => {
   }
 }
 
-
 export const createEvent = async (data) => {
-  
   try {
-
     const res = await Client.post("/:id/event", data)
     return res.data
   } catch (error) {

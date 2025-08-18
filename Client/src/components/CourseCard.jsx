@@ -11,14 +11,16 @@ const CourseCard = ({ object, isTeacher, user }) => {
   return (
     <>
       <div className="course-card light-shadow-box">
-        <div className="course-image-cotainer"><img src={object.image} alt="" /></div>
+        <div className="course-image-cotainer">
+          <img src={object.image} alt="" />
+        </div>
         <h3>{object.name}</h3>
         <p>{object.description}</p>
         <div className="course-buttons">
           <button>
             <Link to={`/course/${object._id}`}>More</Link>
           </button>
-          {isTeacher?null:<button onClick={courseEnroll}>Enroll</button> }
+          {isTeacher ? null : <button onClick={courseEnroll}>Enroll</button>}
         </div>
       </div>
     </>

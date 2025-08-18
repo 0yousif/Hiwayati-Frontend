@@ -382,8 +382,7 @@ button {
   border-radius: 10px;
   color: white;
 }
-button:active{
-  
+button:active {
   background-color: rgb(62, 18, 78);
 }
 .profile-pic-container img {

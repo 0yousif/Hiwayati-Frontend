@@ -17,12 +17,8 @@
     "username": "AliDev",
     "email": "ali.dev@example.com",
     "passwordDigest": "$2b$10$hash2",
-    "currentCourses": [
-      { "course": "66b6a0d2f8a4e2b4f07ccccc", "hours": 15 }
-    ],
-    "previousCourses": [
-      "66b6a0d2f8a4e2b4f07caaaa"
-    ],
+    "currentCourses": [{ "course": "66b6a0d2f8a4e2b4f07ccccc", "hours": 15 }],
+    "previousCourses": ["66b6a0d2f8a4e2b4f07caaaa"],
     "Scheduel": [],
     "skills": []
   },
