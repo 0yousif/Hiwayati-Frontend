@@ -1,7 +1,7 @@
-import { useContext, useState } from "react"
+import { use, useContext, useState } from "react"
 import UserContext from "../context/UserContext"
 import { useNavigate, useParams } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import Client from "../services/api"
 import io from "socket.io-client"
 const socket = io("http://localhost:5000")
@@ -12,7 +12,8 @@ const Course = ({ courseId }) => {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
   const [course, setCourse] = useState(null)
-
+  const [editingMessage, setEditingMessage] = useState(null)
+  const editedMessage = useRef("")
   // new event form stuff
   const initialEventValues = {
     name: "",
@@ -98,9 +99,27 @@ const Course = ({ courseId }) => {
     setMessage("")
   }
 
-  const deleteMessage = async  (messageId,arrayIndex)=>{
+  const deleteMessage = async (messageId, arrayIndex) => {
     await Client.delete(`/course/${id}/message/${messageId}`)
-    setMessages(messages.splice(1,arrayIndex))
+    setMessages(messages.splice(1, arrayIndex))
+  }
+
+  const handleMessageEditSubmit = async (e) => {
+    e.preventDefault()
+    const messageId = editingMessage.id
+    // console.log("reached")
+    await Client.put(`/course/${id}/message/${messageId}`, {
+      content: editedMessage.current.value,
+    })
+    setEditingMessage(null)
+    
+    const message = [...messages].find((message, index) => {
+      if (message._id.toString() === messageId.toString()) {
+        setMessage([...messages][index].content = editedMessage.current.value)
+        editedMessage.current.value = ""
+        return true
+      }
+    })
   }
 
   if (!course) {
@@ -195,13 +214,34 @@ const Course = ({ courseId }) => {
             <div className="live-chat">
               <div className="messages light-shadow-box">
                 {messages
-                  ? messages.map((message,index) => {
+                  ? messages.map((message, index) => {
                       return (
                         <>
-                          <div className="message">
+                          <div className="message" id={message._id}>
                             <h3 className="message-owner">
                               {message.userId.username}
-                              {message.userId._id.toString() === contextUser.id.toString()? <><button onClick={()=> deleteMessage(message._id,index)}>Delete</button></>:null }
+                              {message.userId._id.toString() ===
+                              contextUser.id.toString() ? (
+                                <>
+                                  <button
+                                    onClick={() =>
+                                      deleteMessage(message._id, index)
+                                    }
+                                  >
+                                    Delete
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setEditingMessage({
+                                        id: message._id,
+                                        content: message.content,
+                                      })
+                                    }}
+                                  >
+                                    Edit
+                                  </button>
+                                </>
+                              ) : null}
                             </h3>
                             <p className="message-content">{message.content}</p>
                           </div>
@@ -210,6 +250,25 @@ const Course = ({ courseId }) => {
                     })
                   : null}
               </div>
+              {editingMessage ? (
+                <>
+                  <form onSubmit={handleMessageEditSubmit}>
+                    <input
+                      type="text"
+                      name="content"
+                      id="content"
+                      placeholder={`${editingMessage.content}`}
+                      ref={editedMessage}
+                    />
+
+                    <button type="submit">Edit</button>
+                  </form>
+                  <button onClick={() => setEditingMessage(null)}>
+                    cancel
+                  </button>
+                </>
+              ) : null}
+
               <form action="" onSubmit={handleMessageSubmit}>
                 {course.state === "done" ? (
                   <input
