@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useEffect } from "react"
 import Client from "../services/api"
 import io from "socket.io-client"
-const socket = io("https://hiwayati-7efbc0ac9205.herokuapp.com:5000")
+const socket = io("http://localhost:5000")
 import { getCourse } from "../services/course"
 const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
@@ -72,6 +72,7 @@ const Course = ({ courseId }) => {
         userId: { username: username },
         content: msg,
       }
+      console.log("reached")
       setMessages([...messages, newMessage])
     }
   })
@@ -95,6 +96,11 @@ const Course = ({ courseId }) => {
     })
     sendMessage(message)
     setMessage("")
+  }
+
+  const deleteMessage = async  (messageId,arrayIndex)=>{
+    await Client.delete(`/course/${id}/message/${messageId}`)
+    setMessages(messages.splice(1,arrayIndex))
   }
 
   if (!course) {
@@ -189,12 +195,13 @@ const Course = ({ courseId }) => {
             <div className="live-chat">
               <div className="messages light-shadow-box">
                 {messages
-                  ? messages.map((message) => {
+                  ? messages.map((message,index) => {
                       return (
                         <>
                           <div className="message">
                             <h3 className="message-owner">
                               {message.userId.username}
+                              {message.userId._id.toString() === contextUser.id.toString()? <><button onClick={()=> deleteMessage(message._id,index)}>Delete</button></>:null }
                             </h3>
                             <p className="message-content">{message.content}</p>
                           </div>
