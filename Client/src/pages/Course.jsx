@@ -73,7 +73,6 @@ const Course = ({ courseId }) => {
         userId: { username: username },
         content: msg,
       }
-      console.log("reached")
       setMessages([...messages, newMessage])
     }
   })
@@ -107,7 +106,6 @@ const Course = ({ courseId }) => {
   const handleMessageEditSubmit = async (e) => {
     e.preventDefault()
     const messageId = editingMessage.id
-    // console.log("reached")
     await Client.put(`/course/${id}/message/${messageId}`, {
       content: editedMessage.current.value,
     })
