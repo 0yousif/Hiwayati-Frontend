@@ -1,6 +1,6 @@
 # Hiwayati
 
-
+Click [here](https://hiwayatiwebsite.surge.sh/) to check the deployed version of the website.
 
 ## [Hiwayati-Frontend]() [Hiwayati-Backend](https://github.com/0yousif/Hiwayati-backend)
 
