@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useRef } from "react"
 import Client from "../services/api"
 import io from "socket.io-client"
-const socket = io("http://localhost:5000")
+const socket = io("https://hiwayati-7efbc0ac9205.herokuapp.com:5000")
 import { getCourse } from "../services/course"
 const Course = ({ courseId }) => {
   const { contextUser } = useContext(UserContext)
